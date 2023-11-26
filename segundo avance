@@ -6,7 +6,7 @@ class Videogame():
     def __init__(self):
         self.health = 100
         self.inventory = []
-        self.player_position = [0,3]
+        self.player_position = [7,4]
         self.map = [
             [0, 0, 0, 0, 0, 1, 0, 0, 1, 0],
             [0, 1, 0, 0, 1, 1, 0, 1, 0, 0],
@@ -225,6 +225,7 @@ class Videogame():
 
     def path_J(self):
         pass
+    #completar
 
     def path_K(self):
         print("")
@@ -757,7 +758,7 @@ class Videogame():
             option = input("Type 'up', 'down', 'left', or 'right' to move (or 'exit' to stop): ").lower()
             if option == 'exit':
                 print("Exiting the game.")
-                break  # Salir del bucle while si el usuario decide salir
+                break  # Mejorar, el salir opcionalmente es provisional
 
             x, y = self.player_position
 
@@ -854,38 +855,106 @@ class Videogame():
                     self.print_slow("      You have found a screwdriver, this tool is your key to unraveling mysteries, to unlock secrets. Its power lies ")
                     self.print_slow("      not in brute force,  but in finesse and precision.")
                     print("")
+                
+                #first easter egg (first part)
+                if self.player_position == [1,8]:
+                    print("""
+                                .%%..%%...%%%%...%%..%%...........%%%%....%%%%...%%..%%.
+                                ..%%%%...%%..%%..%%..%%..........%%..%%..%%..%%..%%%.%%.
+                                ...%%....%%..%%..%%..%%..........%%......%%%%%%..%%.%%%.
+                                ...%%....%%..%%..%%..%%..........%%..%%..%%..%%..%%..%%.
+                                ...%%.....%%%%....%%%%............%%%%...%%..%%..%%..%%.
+                                ........................................................
+                                .%%%%%%...%%%%...%%..%%...%%%%...%%..%%.                
+                                ...%%....%%..%%..%%..%%..%%..%%..%%..%%.                
+                                ...%%....%%..%%..%%..%%..%%......%%%%%%.                
+                                ...%%....%%..%%..%%..%%..%%..%%..%%..%%.                
+                                ...%%.....%%%%....%%%%....%%%%...%%..%%.                
+                                ........................................                
+                                .%%%%%...%%%%%%..%%..%%...%%%%...%%..%%..%%%%%..        
+                                .%%..%%..%%.......%%%%...%%..%%..%%%.%%..%%..%%.        
+                                .%%%%%...%%%%......%%....%%..%%..%%.%%%..%%..%%.        
+                                .%%..%%..%%........%%....%%..%%..%%..%%..%%..%%.        
+                                .%%%%%...%%%%%%....%%.....%%%%...%%..%%..%%%%%..        
+                                ................................................        
+                                .%%%%%%..%%..%%..%%%%%%.                                
+                                ...%%....%%..%%..%%.....                                
+                                ...%%....%%%%%%..%%%%...                                
+                                ...%%....%%..%%..%%.....                                
+                                ...%%....%%..%%..%%%%%%.                                
+                                ........................                                
+                                ..%%%%...%%%%%....%%%%....%%%%...%%%%%%.                
+                                .%%......%%..%%..%%..%%..%%..%%..%%.....                
+                                ..%%%%...%%%%%...%%%%%%..%%......%%%%...                
+                                .....%%..%%......%%..%%..%%..%%..%%.....                
+                                ..%%%%...%%......%%..%%...%%%%...%%%%%%.                
+                                ........................................                       
+                    """)
 
+                    print("")
+                    self.print_slow("Type your guess or type 'Out' to not take the quest: ")
+                    while True:
+                        option = input().lower()
+                        if option == 'space':
+                           self.player_position = [3,0]
+                           break
+                        if option == 'out':
+                           break
+                        else:
+                            print("Give it another thought\n")
+                            time.sleep(1)
+
+                #first easter egg (second part)
+                if self.player_position == [3,0]:
+                    self.easter_egg1()
+                    self.print_slow("      Oh there's something else I've got to tell you.")
+                    self.print_slow("      Alexei Dimitrievski (The Keeper), once a brilliant scientist of the USSR, delved into mind control experiments")
+                    self.print_slow("      gone awry. His ambitious pursuit led to a catastrophic mishap when a machine designed to manipulate minds backfired.")
+                    self.print_slow("      A being from a distant world seized the opportunity, intertwining its essence with The Keeper's consciousness.")
+                    print("")
+                    self.print_slow("      This entity, reliant on feeding off others' thoughts to sustain its existence, spurred The Keeper to abduct unsuspecting")
+                    self.print_slow("      individuals. The captive souls become tormented victims, subjected to nightmarish fever dreams as the creature devours ")
+                    self.print_slow("      their very thoughts.")
+                    print("")
+                    self.print_slow("      Driven by an insatiable hunger for intellect, The Keeper and the fused entity weave a dark tapestry of torment, trapping")
+                    self.print_slow("      innocent minds within a labyrinth of nightmares, perpetuating their own survival at the cost of others' mental essence.")
+                    print("")    
+                    #una vez descubierto el easter egg, agregar la opcion de regresar a [1,8]
+
+                #second easter egg
                 if self.player_position == [9,9]:
                     print("")
-                    self.print_slow("Complete the three riddles to unlock the secret:")
-                    self.print_slow("First riddle:")
-                    self.print_slow("This suspense/science fiction series takes place in a made-up town in Indiana in 1983. The name of this iconic")
-                    self.print_slow("place is similar to the name of a bird. The bird in question belongs to the family Accipitridae. They are mainly")
-                    self.print_slow("woodland birds that hunt during the day and have high visual acuity. They are known for their sharp talons and beak.")
-                    self.print_slow("Guess the name of the town:")
+                    self.print_slow("      Complete the three riddles to unlock the secret:")
+                    self.print_slow("      First riddle:")
+                    self.print_slow("      This suspense/science fiction series takes place in a made-up town in Indiana in 1983. The name of this iconic")
+                    self.print_slow("      place is similar to the name of a bird. The bird in question belongs to the family Accipitridae. They are mainly")
+                    self.print_slow("      woodland birds that hunt during the day and have high visual acuity. They are known for their sharp talons and beak.")
+                    self.print_slow("      Guess the name of the town:")
                     print("")
                     while True:
                         option = input("Type your guess: ").lower()
                         if any(keyword in option for keyword in ['hawkins']):
-                            self.print_slow("Very nice! You have completed the first riddle.")
-                            self.print_slow("Second riddle:")
-                            self.print_slow("I am a shadow, a whisper in the night, I follow a number through her mind. I am the between worlds might.")
-                            self.print_slow("I control the hive, Who am I, that brings Hawkins and soon the world, in such pain?")
-                            self.print_slow("Guess its name:")
+                            print("")
+                            self.print_slow("      Very nice! You have completed the first riddle.")
+                            self.print_slow("      Second riddle:")
+                            self.print_slow("      I am a shadow, a whisper in the night, I follow a number through her mind. I am the between worlds might.")
+                            self.print_slow("      I control the hive, Who am I, that brings Hawkins and soon the world, in such pain?")
+                            self.print_slow("      Guess its name:")
                             print("")
                             while True:
-                                option = input("Type your guess: ").lower()
+                                option = input("       Type your guess: ").lower()
                                 if any(keyword in option for keyword in ['vecna']):
-                                    self.print_slow("Oh! You're on fire, you have completed the second riddle.")
-                                    self.print_slow("Third riddle:")
-                                    self.print_slow("A outside-world creature based on a D&D character which hunts some of their preys in the middle of the")
-                                    self.print_slow("night, travels between worlds, its mouth opens like a flower, its weakness it’s a person called as a ")
-                                    self.print_slow("number and fire. Type the creature's name: ")
+                                    print("")
+                                    self.print_slow("      Oh! You're on fire, you have completed the second riddle.")
+                                    self.print_slow("      Third riddle:")
+                                    self.print_slow("      A outside-world creature based on a D&D character which hunts some of their preys in the middle of the")
+                                    self.print_slow("      night, travels between worlds, its mouth opens like a flower, its weakness it’s a person called as a ")
+                                    self.print_slow("      number and fire. Type the creature's name: ")
                                     print("")
                                     while True:
-                                        option = input("Type your guess: ").lower()
+                                        option = input("       Type your guess: ").lower()
                                         if any(keyword in option for keyword in ['demogorgon']):
-                                            self.print_slow("Congratulations! You have completed all riddles.")
+                                            self.print_slow("      Congratulations! You have completed all riddles.")
                                             self.easter_egg2()
                                             break
                                         else:
@@ -897,7 +966,9 @@ class Videogame():
                         else:
                             print("Not the word we're looking for.\n")
                 else:
-                    print("Invalid input. Please try again.")           
+                    print("Invalid input. Please try again.")
+                    
+
                 
                 print("Actual position:", self.player_position)
                 print("")

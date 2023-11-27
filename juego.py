@@ -4,9 +4,9 @@ import pygame
 
 class Videogame():
     def __init__(self):
-        self.health = 100
-        self.inventory = []
-        self.player_position = [7,4]
+        self.health = 100 #limitar la vida, no puede llegar a mas de 100 pts
+        self.inventory = [] #crear el inventario
+        self.player_position = [0,3]
         self.map = [
             [0, 0, 0, 0, 0, 1, 0, 0, 1, 0],
             [0, 1, 0, 0, 1, 1, 0, 1, 0, 0],
@@ -25,6 +25,7 @@ class Videogame():
         pygame.mixer.init()
         pygame.mixer.music.load(file_path)
         pygame.mixer.music.play()
+        #falta: alargar la duracion de las canciones
 
     def print_slow(self, text):
         for char in text:
@@ -225,7 +226,7 @@ class Videogame():
 
     def path_J(self):
         pass
-    #completar
+    #completar historia
 
     def path_K(self):
         print("")
@@ -595,6 +596,10 @@ class Videogame():
                   .=-++=======++*#=     =*******+==--::::::::-----=========---:::-+**++=========++*. -##%@%%%%%%%%%%#+: 
         """)
 
+    def End_Game(self):
+        pass
+    #crear historia y minijuego final
+
     def Title(self):
         file_path = r'C:\Users\lloyd\Downloads\Y2meta.app - Billie Eilish - everything i wanted (Official Instrumental) (128 kbps).mp3'
         self.play_music(file_path) 
@@ -755,225 +760,586 @@ class Videogame():
 
     def move_player(self):
         while True:
-            option = input("Type 'up', 'down', 'left', or 'right' to move (or 'exit' to stop): ").lower()
-            if option == 'exit':
-                print("Exiting the game.")
-                break  # Mejorar, el salir opcionalmente es provisional
-
             x, y = self.player_position
 
-            if option in ['up', 'down', 'left', 'right']:
-                if option == 'up' and x > 0 and self.map[x - 1][y] != 1:
-                    self.player_position = [x - 1, y]
-                elif option == 'down' and x < len(self.map) - 1 and self.map[x + 1][y] != 1:
-                    self.player_position = [x + 1, y]
-                elif option == 'left' and y > 0 and self.map[x][y - 1] != 1:
-                    self.player_position = [x, y - 1]
-                elif option == 'right' and y < len(self.map[0]) - 1 and self.map[x][y + 1] != 1:
-                    self.player_position = [x, y + 1]
-                else:
-                    print("Hold up! There's tree")
-                    continue  # Continuar pidiendo input si el movimiento no es válido
+            if self.health > 0 and self.health <= 100:
+                option = input("Type 'up', 'down', 'left', or 'right' to move ").lower()
+                if option in ['up', 'down', 'left', 'right']:
+                    if option == 'up' and x > 0 and self.map[x - 1][y] != 1:
+                        self.player_position = [x - 1, y]
+                    elif option == 'down' and x < len(self.map) - 1 and self.map[x + 1][y] != 1:
+                        self.player_position = [x + 1, y]
+                    elif option == 'left' and y > 0 and self.map[x][y - 1] != 1:
+                        self.player_position = [x, y - 1]
+                    elif option == 'right' and y < len(self.map[0]) - 1 and self.map[x][y + 1] != 1:
+                        self.player_position = [x, y + 1]
+                    else:
+                        print("Hold up! There's tree")
+                        continue  # Continuar pidiendo input si el movimiento no es válido
 
-                #apples
-                if self.player_position == [1, 0] or self.player_position == [3, 8] or self.player_position == [7, 3] or self.player_position == [9, 2] or self.player_position == [9, 7]:
-                    print("""
-                                .................................................................
-                                ........................................*+=......................
-                                .......................................*@%-......................
-                                .......................:--=--:::------*%*........................
-                                ..................:-+**+=-:......:-=+##++===-....................
-                                .............:-=*#**+++=--::::-----+#*-::::-=++-:................
-                                ...........:=++++============+++++*@#++==-:::-+++=--.............
-                                .........:-+*#*+==-:..:-===--=++**%%#*+++===--=====+*=-..........
-                                ........:+#%%%#*==-::::-==----=+*%##*=-----:::::::-=++++=........
-                                .......:*%%%%%#+==---:::.....:::::--::::::.......:::-==+**-......
-                                ......:+%%%%%%%#*+===--::........................:::---=+**=.....
-                                .....:=*##%##%%%%%%#**++=-::::...............::::::----==+**-....
-                                ....:-+****####%%%%@%%%%%##*+==-----:::::------====------=+**....
-                                ....-++***#####%%%%@@@@@@@%%%%%%####*****++++**++++==--:--=+*-...
-                                ...:=++***#####%%%%%%@@@@@@@@@@@@@@@@%%%%%%###**++===-:::--+*+...
-                                ...:=+**#####%%%%%%%@@@@@@@@@@@@@@@@@@@@@@%%#***+++=--::::-+*+...
-                                ...:=++*######%#%%%%%@@@@@@@@@@@@@@@@@@@@%%##****++=--::::-+*+...
-                                ...:=++*##%%%%%%%%%%%@@@@@@@@@@@@@@@@@@@%%####****+=-::::--+*+...
-                                ...:=++**###%%%%%%%%%%@@@@@@@@@@@@@@@@@@%%%####***+=-::::-=**:...
-                                ....-++***###%%%%%@@@@@@@@@@@@@@@@@@@@@@%%####***+=--::::-=*+....
-                                ....:=++***#####%%%%@@@@@@@@@@@@@@@@@@@@%####****+=-::::-=*#:....
-                                .....-++***########%%%%@@@@@@@@@@@@@@%%%%####***++=-::::-+#-.....
-                                ......-++***########%%%%%@@@@@@@@@%%%%%#####****+=--::--+*=......
-                                .......-+++**#########%%%%%%%%%%%%%%%%#####****+==-::--+*-.......
-                                ........-+++**########%%%%%%%%%%%%%%######****+==----=++:........
-                                .........:=++***#######%%%%%%%%%%%%#######**++==---==+=..........
-                                ...........-+***######%%%%%%%%%%#########**+++====+++-...........
-                                .............-+#####%%%%%%%%%%%%%#######***++++++++-.............
-                                ...............:=*%%%%%%%%%%%%%%%%%######*******+-...............
-                                ...................:-=+#@@@@@@%%%%%%%%%######+=:.................
-                                .........................:=*#%%##***+**+++=-.....................
-                                .................................................................
+                    #apples
+                    if self.player_position == [1, 0] or self.player_position == [3, 8] or self.player_position == [7, 3] or self.player_position == [9, 2] or self.player_position == [9, 7]:
+                        print("""
+                                    .................................................................
+                                    ........................................*+=......................
+                                    .......................................*@%-......................
+                                    .......................:--=--:::------*%*........................
+                                    ..................:-+**+=-:......:-=+##++===-....................
+                                    .............:-=*#**+++=--::::-----+#*-::::-=++-:................
+                                    ...........:=++++============+++++*@#++==-:::-+++=--.............
+                                    .........:-+*#*+==-:..:-===--=++**%%#*+++===--=====+*=-..........
+                                    ........:+#%%%#*==-::::-==----=+*%##*=-----:::::::-=++++=........
+                                    .......:*%%%%%#+==---:::.....:::::--::::::.......:::-==+**-......
+                                    ......:+%%%%%%%#*+===--::........................:::---=+**=.....
+                                    .....:=*##%##%%%%%%#**++=-::::...............::::::----==+**-....
+                                    ....:-+****####%%%%@%%%%%##*+==-----:::::------====------=+**....
+                                    ....-++***#####%%%%@@@@@@@%%%%%%####*****++++**++++==--:--=+*-...
+                                    ...:=++***#####%%%%%%@@@@@@@@@@@@@@@@%%%%%%###**++===-:::--+*+...
+                                    ...:=+**#####%%%%%%%@@@@@@@@@@@@@@@@@@@@@@%%#***+++=--::::-+*+...
+                                    ...:=++*######%#%%%%%@@@@@@@@@@@@@@@@@@@@%%##****++=--::::-+*+...
+                                    ...:=++*##%%%%%%%%%%%@@@@@@@@@@@@@@@@@@@%%####****+=-::::--+*+...
+                                    ...:=++**###%%%%%%%%%%@@@@@@@@@@@@@@@@@@%%%####***+=-::::-=**:...
+                                    ....-++***###%%%%%@@@@@@@@@@@@@@@@@@@@@@%%####***+=--::::-=*+....
+                                    ....:=++***#####%%%%@@@@@@@@@@@@@@@@@@@@%####****+=-::::-=*#:....
+                                    .....-++***########%%%%@@@@@@@@@@@@@@%%%%####***++=-::::-+#-.....
+                                    ......-++***########%%%%%@@@@@@@@@%%%%%#####****+=--::--+*=......
+                                    .......-+++**#########%%%%%%%%%%%%%%%%#####****+==-::--+*-.......
+                                    ........-+++**########%%%%%%%%%%%%%%######****+==----=++:........
+                                    .........:=++***#######%%%%%%%%%%%%#######**++==---==+=..........
+                                    ...........-+***######%%%%%%%%%%#########**+++====+++-...........
+                                    .............-+#####%%%%%%%%%%%%%#######***++++++++-.............
+                                    ...............:=*%%%%%%%%%%%%%%%%%######*******+-...............
+                                    ...................:-=+#@@@@@@%%%%%%%%%######+=:.................
+                                    .........................:=*#%%##***+**+++=-.....................
+                                    .................................................................
 
         
-                    """)
-                    print ("You have found an apple, they help you to restore your health by 5 points, you can save them for later, each takes one slot ")
-                    print("")
+                        """)
+                        print ("You have found an apple, they help you to restore your health by 5 points, you can save them for later, each takes one slot ")
+                        print("")
+                        #falta: comer o dejarla
 
-                #screwdriver    
-                if self.player_position == [2,1]:
-                    print("""
+                    #screwdriver    
+                    if self.player_position == [2,1]:
+                        print("""
                                                                                                  
                                                                  
-                                                                              .=*#*.     
-                                                                           :=**+++*%     
-                                                                           #*+++++%.     
-                                                                          **++*##%=      
-                                                                        =*--#%%+-.       
-                                                                      =*=-*##-           
-                                                                    =#+-+##+             
-                                                                  -*+==*#*.              
-                                                                -**==*#*:                
-                                                              -#*==**#-                  
-                                                       .... :**==**#+                    
-                                                     =%#%*#%*+=**##.                     
-                                                    .@**@**%+***%-                       
-                                                    +@#-=%%*###%+                        
-                                              :--=+#*#@%+-=#%###@                        
-                                           =+***++++++*#%%*==+*%+                        
-                                        .=*-:+#*++:+******%%++-.                         
-                                       +*-:*#*++**#=-+###@*                              
-                                    .=*--*#*+**+:-#*+=-*%#                               
-                                  :++--*#*+**+::##*+**#*@:                               
-                                :*+-=##*++++::#%*+*#**%@#                                
-                              :**+=##*++++--*#*+*#**%@%-                                 
-                             :%#+##*+**+:-*#*+*#**%@%=                                   
-                             *###*+**+--##*+*#**@@@=                                     
-                             **++##*--*#*++**#@@%=                                       
-                             :#+%#==##*++++#@@%-                                         
-                              *#*%##*+*#+*@@@-                                           
-                               :+*##*+#@@@%-                                             
-                                   .:--==:                                               
+                                                                                  .=*#*.     
+                                                                               :=**+++*%     
+                                                                               #*+++++%.     
+                                                                              **++*##%=      
+                                                                            =*--#%%+-.       
+                                                                          =*=-*##-           
+                                                                        =#+-+##+             
+                                                                      -*+==*#*.              
+                                                                    -**==*#*:                
+                                                                  -#*==**#-                  
+                                                           .... :**==**#+                    
+                                                         =%#%*#%*+=**##.                     
+                                                        .@**@**%+***%-                       
+                                                        +@#-=%%*###%+                        
+                                                  :--=+#*#@%+-=#%###@                        
+                                               =+***++++++*#%%*==+*%+                        
+                                            .=*-:+#*++:+******%%++-.                         
+                                           +*-:*#*++**#=-+###@*                              
+                                        .=*--*#*+**+:-#*+=-*%#                               
+                                      :++--*#*+**+::##*+**#*@:                               
+                                    :*+-=##*++++::#%*+*#**%@#                                
+                                  :**+=##*++++--*#*+*#**%@%-                                 
+                                 :%#+##*+**+:-*#*+*#**%@%=                                   
+                                 *###*+**+--##*+*#**@@@=                                     
+                                 **++##*--*#*++**#@@%=                                       
+                                 :#+%#==##*++++#@@%-                                         
+                                  *#*%##*+*#+*@@@-                                           
+                                   :+*##*+#@@@%-                                             
+                                       .:--==:                                               
                                                                 
-                    """)
-                    self.print_slow("      You have found a screwdriver, this tool is your key to unraveling mysteries, to unlock secrets. Its power lies ")
-                    self.print_slow("      not in brute force,  but in finesse and precision.")
-                    print("")
+                        """)
+                        self.print_slow("      You have found a screwdriver, this tool is your key to unraveling mysteries, to unlock secrets. Its power lies ")
+                        self.print_slow("      not in brute force,  but in finesse and precision.")
+                        print("")
+                        #falta: guardar o no en el inventario
                 
-                #first easter egg (first part)
-                if self.player_position == [1,8]:
-                    print("""
-                                .%%..%%...%%%%...%%..%%...........%%%%....%%%%...%%..%%.
-                                ..%%%%...%%..%%..%%..%%..........%%..%%..%%..%%..%%%.%%.
-                                ...%%....%%..%%..%%..%%..........%%......%%%%%%..%%.%%%.
-                                ...%%....%%..%%..%%..%%..........%%..%%..%%..%%..%%..%%.
-                                ...%%.....%%%%....%%%%............%%%%...%%..%%..%%..%%.
-                                ........................................................
-                                .%%%%%%...%%%%...%%..%%...%%%%...%%..%%.                
-                                ...%%....%%..%%..%%..%%..%%..%%..%%..%%.                
-                                ...%%....%%..%%..%%..%%..%%......%%%%%%.                
-                                ...%%....%%..%%..%%..%%..%%..%%..%%..%%.                
-                                ...%%.....%%%%....%%%%....%%%%...%%..%%.                
-                                ........................................                
-                                .%%%%%...%%%%%%..%%..%%...%%%%...%%..%%..%%%%%..        
-                                .%%..%%..%%.......%%%%...%%..%%..%%%.%%..%%..%%.        
-                                .%%%%%...%%%%......%%....%%..%%..%%.%%%..%%..%%.        
-                                .%%..%%..%%........%%....%%..%%..%%..%%..%%..%%.        
-                                .%%%%%...%%%%%%....%%.....%%%%...%%..%%..%%%%%..        
-                                ................................................        
-                                .%%%%%%..%%..%%..%%%%%%.                                
-                                ...%%....%%..%%..%%.....                                
-                                ...%%....%%%%%%..%%%%...                                
-                                ...%%....%%..%%..%%.....                                
-                                ...%%....%%..%%..%%%%%%.                                
-                                ........................                                
-                                ..%%%%...%%%%%....%%%%....%%%%...%%%%%%.                
-                                .%%......%%..%%..%%..%%..%%..%%..%%.....                
-                                ..%%%%...%%%%%...%%%%%%..%%......%%%%...                
-                                .....%%..%%......%%..%%..%%..%%..%%.....                
-                                ..%%%%...%%......%%..%%...%%%%...%%%%%%.                
-                                ........................................                       
-                    """)
+                    #first easter egg (first part)
+                    if self.player_position == [1,8]:
+                        print("""
+                                    .%%..%%...%%%%...%%..%%...........%%%%....%%%%...%%..%%.
+                                    ..%%%%...%%..%%..%%..%%..........%%..%%..%%..%%..%%%.%%.
+                                    ...%%....%%..%%..%%..%%..........%%......%%%%%%..%%.%%%.
+                                    ...%%....%%..%%..%%..%%..........%%..%%..%%..%%..%%..%%.
+                                    ...%%.....%%%%....%%%%............%%%%...%%..%%..%%..%%.
+                                    ........................................................
+                                    .%%%%%%...%%%%...%%..%%...%%%%...%%..%%.                
+                                    ...%%....%%..%%..%%..%%..%%..%%..%%..%%.                
+                                    ...%%....%%..%%..%%..%%..%%......%%%%%%.                
+                                    ...%%....%%..%%..%%..%%..%%..%%..%%..%%.                
+                                    ...%%.....%%%%....%%%%....%%%%...%%..%%.                
+                                    ........................................                
+                                    .%%%%%...%%%%%%..%%..%%...%%%%...%%..%%..%%%%%..        
+                                    .%%..%%..%%.......%%%%...%%..%%..%%%.%%..%%..%%.        
+                                    .%%%%%...%%%%......%%....%%..%%..%%.%%%..%%..%%.        
+                                    .%%..%%..%%........%%....%%..%%..%%..%%..%%..%%.        
+                                    .%%%%%...%%%%%%....%%.....%%%%...%%..%%..%%%%%..        
+                                    ................................................        
+                                    .%%%%%%..%%..%%..%%%%%%.                                
+                                    ...%%....%%..%%..%%.....                                
+                                    ...%%....%%%%%%..%%%%...                                
+                                    ...%%....%%..%%..%%.....                                
+                                    ...%%....%%..%%..%%%%%%.                                
+                                    ........................                                
+                                    ..%%%%...%%%%%....%%%%....%%%%...%%%%%%.                
+                                    .%%......%%..%%..%%..%%..%%..%%..%%.....                
+                                    ..%%%%...%%%%%...%%%%%%..%%......%%%%...                
+                                    .....%%..%%......%%..%%..%%..%%..%%.....                
+                                    ..%%%%...%%......%%..%%...%%%%...%%%%%%.                
+                                    ........................................                       
+                        """)
 
-                    print("")
-                    self.print_slow("Type your guess or type 'Out' to not take the quest: ")
-                    while True:
-                        option = input().lower()
-                        if option == 'space':
-                           self.player_position = [3,0]
-                           break
-                        if option == 'out':
-                           break
-                        else:
-                            print("Give it another thought\n")
-                            time.sleep(1)
+                        print("")
+                        self.print_slow("Type your guess or type 'Out' to not take the quest: ")
+                        while True:
+                            option = input().lower()
+                            if option == 'space':
+                               self.player_position = [3,0]
+                               break
+                            if option == 'out':
+                               break
+                            else:
+                                print("Give it another thought\n")
+                                time.sleep(1)
+                                #falta: arregalr error: cuando se escribe out, muestra invalid input aunque realice correctamente la accion
+                                #falta: habilitar poder regresar a la casilla desde las que te telatransporto, regresar a [1,8]
 
-                #first easter egg (second part)
-                if self.player_position == [3,0]:
-                    self.easter_egg1()
-                    self.print_slow("      Oh there's something else I've got to tell you.")
-                    self.print_slow("      Alexei Dimitrievski (The Keeper), once a brilliant scientist of the USSR, delved into mind control experiments")
-                    self.print_slow("      gone awry. His ambitious pursuit led to a catastrophic mishap when a machine designed to manipulate minds backfired.")
-                    self.print_slow("      A being from a distant world seized the opportunity, intertwining its essence with The Keeper's consciousness.")
-                    print("")
-                    self.print_slow("      This entity, reliant on feeding off others' thoughts to sustain its existence, spurred The Keeper to abduct unsuspecting")
-                    self.print_slow("      individuals. The captive souls become tormented victims, subjected to nightmarish fever dreams as the creature devours ")
-                    self.print_slow("      their very thoughts.")
-                    print("")
-                    self.print_slow("      Driven by an insatiable hunger for intellect, The Keeper and the fused entity weave a dark tapestry of torment, trapping")
-                    self.print_slow("      innocent minds within a labyrinth of nightmares, perpetuating their own survival at the cost of others' mental essence.")
-                    print("")    
-                    #una vez descubierto el easter egg, agregar la opcion de regresar a [1,8]
+                    #first easter egg (second part)
+                    if self.player_position == [3,0]:
+                        self.easter_egg1()
+                        self.print_slow("      Oh there's something else I've got to tell you.")
+                        self.print_slow("      Alexei Dimitrievski (The Keeper), once a brilliant scientist of the USSR, delved into mind control experiments")
+                        self.print_slow("      gone awry. His ambitious pursuit led to a catastrophic mishap when a machine designed to manipulate minds backfired.")
+                        self.print_slow("      A being from a distant world seized the opportunity, intertwining its essence with The Keeper's consciousness.")
+                        print("")
+                        self.print_slow("      This entity, reliant on feeding off others' thoughts to sustain its existence, spurred The Keeper to abduct unsuspecting")
+                        self.print_slow("      individuals. The captive souls become tormented victims, subjected to nightmarish fever dreams as the creature devours ")
+                        self.print_slow("      their very thoughts.")
+                        print("")
+                        self.print_slow("      Driven by an insatiable hunger for intellect, The Keeper and the fused entity weave a dark tapestry of torment, trapping")
+                        self.print_slow("      innocent minds within a labyrinth of nightmares, perpetuating their own survival at the cost of others' mental essence.")
+                        print("")    
+                        #una vez descubierto el easter egg, agregar la opcion de regresar a [1,8]
 
-                #second easter egg
-                if self.player_position == [9,9]:
+                    #second easter egg
+                    if self.player_position == [9,9]:
+                        print("")
+                        self.print_slow("      Complete the three riddles to unlock the secret:")
+                        self.print_slow("      First riddle:")
+                        self.print_slow("      This suspense/science fiction series takes place in a made-up town in Indiana in 1983. The name of this iconic")
+                        self.print_slow("      place is similar to the name of a bird. The bird in question belongs to the family Accipitridae. They are mainly")
+                        self.print_slow("      woodland birds that hunt during the day and have high visual acuity. They are known for their sharp talons and beak.")
+                        self.print_slow("      Guess the name of the town:")
+                        print("")
+                        while True:
+                            option = input("Type your guess: ").lower()
+                            if any(keyword in option for keyword in ['hawkins']):
+                                print("")
+                                self.print_slow("      Very nice! You have completed the first riddle.")
+                                self.print_slow("      Second riddle:")
+                                self.print_slow("      I am a shadow, a whisper in the night, I follow a number through her mind. I am the between worlds might.")
+                                self.print_slow("      I control the hive, Who am I, that brings Hawkins and soon the world, in such pain?")
+                                self.print_slow("      Guess its name:")
+                                print("")
+                                while True:
+                                    option = input("       Type your guess: ").lower()
+                                    if any(keyword in option for keyword in ['vecna']):
+                                        print("")
+                                        self.print_slow("      Oh! You're on fire, you have completed the second riddle.")
+                                        self.print_slow("      Third riddle:")
+                                        self.print_slow("      A outside-world creature based on a D&D character which hunts some of their preys in the middle of the")
+                                        self.print_slow("      night, travels between worlds, its mouth opens like a flower, its weakness it’s a person called as a ")
+                                        self.print_slow("      number and fire. Type the creature's name: ")
+                                        print("")
+                                        while True:
+                                            option = input("       Type your guess: ").lower()
+                                            if any(keyword in option for keyword in ['demogorgon']):
+                                                self.print_slow("      Congratulations! You have completed all riddles.")
+                                                self.easter_egg2()
+                                                #cuando cambie de casilla regrese a la cancion base
+                                                break
+                                            else:
+                                                print("Not the word we're looking for.\n")
+                                        break
+                                    else:
+                                        print("Not the word we're looking for.\n")
+                                break
+                            else:
+                                print("Not the word we're looking for.\n")
+                    else:
+                        print("Invalid input. Please try again.")
+                    
+                    if self.player_position == [9,8] or self.player_position == [1,9]:
+                        file_path = r'C:\Users\lloyd\Downloads\Y2meta.app - Billie Eilish - everything i wanted (Official Instrumental) (128 kbps).mp3'
+                        self.play_music(file_path)
+
+                    #broke down car   
+                    if self.player_position == [0,0]:
+                        print("""
+                                    ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+                                    ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+                                    ::::::::::::::::::::::::::::::::::::::::==+**###%%%##***++==--::::::::::::::::::::::::::.:
+                                    :::::::::::::::::::::::::::::::::::::::+---=+**#%%%%%%%%%%%%%%%#*=-::.:::...:......::...::
+                                    :::::::::::::::::::::::::::::::::::::-+.......:-==+**#%%%%%@@%%%%%%+::::.::::.............
+                                    ::::::::::::::::::::::::::::::::::::++.......::====++*++*###*#%%%%@@%+==-:::::::..........
+                                    ::::::::::::::::::::::::::::::-==+*#*=-------=------+*++=+**+#%%%%@@@@#+++++=-::..........
+                                    ::::::::::::::::::--==++**##%%%%%@@@@%*+***++=====++-=+++=+*+#%%%%%@@%#*+++===---::=:.....
+                                    ::::::::::::-=+*%%##*#%@@%%%%#####*++====+**###%#****+*---=+=++===**+=*%#*+=--=+*#%#=.::::
+                                    ::::::::=*#%@%%###%%%##%%%%%%###****#####%%%%%%%%%%%%####***+++*****#***%%%%%##***+*+:::::
+                                    ::::::-:.#%%%@%%%**#%@@%%%##%%%%%%%@@@%%%%%%%%%%###*+****##%%@@@@@@@@%####*++*%@%%%%--::::
+                                    ::::::: :#*#%+=+*#%%%%%%%%%@%%%%%%%%%%%%%#####*###%%@@@@@@@@@@@@@@@@@@@@@#++*-#@@#+-::::::
+                                    :::::::-*%%%#+*##%%%%%%@@%#%%%@@%%%#****##%%%%%####%@@@@@@@@@@@@@@@@@*%@%*+**====------:::
+                                    :::::--#%%#%#+=*#**###**-=%@%%#*++=+**#######%%@@@@@@@@@@@@@@@@@@@@@#+=#*###--*+===----:::
+                                    :::::--+==%#**+*##%%%##-..*%%%%%*######%%%@@@@@@@@@@@@@@@@@@@@%%%%%%%%%%%=-:-++==---------
+                                    ::::::-====+*+*#%@%###*-.:#@@@%@@@@@%*++==*@@@@@@@@@@@@@%%%%%%%%%#########*+=----------::-
+                                    :-:::------===++++*#=+#%=#@@@@@@@@@%+*++##:*@@@%%%%%%%##%%##**+++===----------------------
+                                    -:--:::---===+++++===+-#+@@@@@#*@@@+#=%*#*-*@@%%%%%###***++++==-----------:-:---------:::-
+                                    -:--------====+++***=++---+===+#%%@=@*%#*=-%%%##**+++=======----------:::-------------::::
+                                    -:---------===+=++++***######%%%*#@+=*=-:=##**++=+=====--------------:---------------:---:
+                                    -::::::-------=======+=+++*****##*#@#*++**++++======-=----------:--::::------------------:
+                                    ::::::::::---------=-==-=============================----------:::::::---:---------:------
+                                    :::::::::::::::-::-:--------------------===-====-=----------------------:-----------------                    
+                        """)
+                        self.print_slow("      Looks like you have found a Mercedes-Benz 190 SL from the 50s in a perfectly awful shape, it can’t even")
+                        self.print_slow("      be ridden. ")
+                        print("")
+                        self.print_slow("      WOW! There’s a pack of cookies inside of the car, you can use them to gain +10 of health ")
+                        print("""
+
+                                                                   .::::-=+#%%%%%-                    
+                                                                =#%@%%%%#**+===+@@                    
+                                                             :*@#+=#####======*@+.                    
+                                                           =%%*+====***+======+%@+                    
+                                                         .*@*==================%@:                    
+                                                        =@#+============+**+===*@##:                  
+                                                       +@%%#==========+%###%*====#@-.:                
+                                                      -@##%#+=========*%#####====+#%%@# -*= -%%+#@%.  
+                                                     +@*===============+*##*+========+%%%*%%%*+***@+  
+                                                    -@*==========================================+%%  
+                                                    *@=====+**+==================+***==========+#%%@= 
+                                                    +@====*%####=================###%+=========*%%%@@.
+                                                    -@*===*%####==================**+============+*#@=
+                                                    .@*====+***+===========++===========+*+======+*#@-
+                                                    -@+==================+%##%========+%####====+**@% 
+                                                    .@#==================+%##%+=======+%###%+===**%@: 
+                                                     +@%%%+========+**+===+*#*=========+***+===+**@+  
+                                                      =%#%*========%##%*=====================+***@%   
+                                                       .#@+========+##*+==================+%%%##@+    
+                                                         +@*====================+####+====+%%%@%:     
+                                                          +@#+++================#####%=+++***@#.      
+                                                           -#@%#*+==============+##%#****#%@%=        
+                                                              -+%%#***####+++++++++***#%%+:           
+                                                                 -*%%@@%%%****##%%%%@%+:              
+                                                                      .-=*#%%#+-::::                  
+
+                        """)
+                        #falta: consumir o dejar el item
+                
+                    #Radio
+                    if self.player_position == [2,4]:
+                        print("""
+                                                  .:.                                               
+                                               .:---  .::.....                                      
+                                               :----  .::------::::::.....                          
+                                               :---:         ....::::----:---::::.....              
+                                               :----                     ....:::---------:.         
+                                               :----:-=+++===--:::...               ..----.         
+                                               -+**#####*##############***++==--:::...----.         
+                                           :+###########*##****************#############***+++=-    
+                                           *############*##*#+****########*#******************##-   
+                                           *############*##*#....:::=%*==##*****####%%###******#-   
+                                           *############*##**......:=%*::*#****#%%####%%%%###**#-   
+                                           *############*##**+++++==+*+==*#***###******##%%#***#-   
+                                           *############*##*####***********#*%#**********#%%#**#=   
+                                           *############*##*###############*#+*********+++*%%#*#=   
+                                           *############*##*##########******#=+*#@@@%#+++++#%#*#=   
+                                           *############*##**##**************==#@%%##%%++++*%%*#=   
+                                           *############*##*##############*#*--%@@%***%*====%%##=   
+                                           *############*##*##########******#--*@@@@@@@*====%%##+   
+                                           *############*##*#######*********#=--#@@@@@#==--*%#*#+   
+                                           *############*##**#############**##----++=-::::-%##*#+   
+                                           *############*###*+=++*#***==++***##-::::.....-%%#**#*   
+                                           *################--::..+**--:..:***##+-::....+%##*#*#*   
+                                           *################+=-:.:+*#==-:.:****##%#***#%%##****#*   
+                                           *#################*******##**********#########*****##*   
+                                           *#%%%%%%%%######*####****#####**********************#*   
+                                           :#%%%%%%%%%%%%*#####################################*-   
+                                                            
+                        """)
+                        self.print_slow("      You've found a radio. 'What’s up, Jimmy? Looks like a wonderful day, ain’t it?' – 'Oh! You bet, Mike.")
+                        self.print_slow("      Wait!... the criminalistics department has brand new information. A 17-year-old teen has been missing for")
+                        self.print_slow("      over 2 days; he responds to the name of Tony Byers…' – “. ")
+                        self.print_slow("      Oh no! The radio has run out of battery.")
+                        print("")
+
+                    #Jacket
+                    if self.player_position == [5,2]:
+                        print("""                                                              
+                                                                                                                                            
+                                                        -+********=.                                   
+                                                      =*=+--=====*+#*:                                 
+                                                     **-=*=======*=++%-                                
+                                                    *+-==*=======*==++%=.                              
+                                                   #+-===*=======*===++@=                              
+                                                 .#=-====*=======*====++%-                             
+                                                 %+=+++++#+++++++*++++***%:                            
+                                                #+-=++***#+++++++#***++++*#:                           
+                                              .%%%%%%@%%%%%%%%%%%%%%%@%%%%@#:                          
+                                              .@%%%%%%@@%%%%%%%%%%%@%%%%%%@%:.                         
+                                               .=@%%%%%%%@%%%%%%%%@%%%%%@%+::.                         
+                                               =#++*#%@%%%@+++++%%%%@%#*+*#*.                          
+                                             :#=-=====+*#%%@===%@%#*++=====*#-                         
+                                            +#--=========+#@*:=@#++=========+##.                       
+                                           **--============*%+%**============+##.                      
+                                          ++--=============*+@*+*=============+#*.                     
+                                         :#--===++=========*#*++*======++=====++#+.                    
+                                        .%--===++#=========*%==+*=======+#=====++%-.                   
+                                        %+--===++%=========*#==+*=======+%+=====+*@:                   
+                                       =%--===++#*==##*====*#*++*===*#%=+*#=====++%+.                  
+                                       %---===++@==*@%+====*#+++*===+%@#=+%======++%:                  
+                                      -*--===++##=*@%#=====*#==+*====#%@*+##=====++#+:                 
+                                      *=--===++@%%%#*======*#==+*=====*#%%%@+====+++#:.                
+                                      %%##*+++#%*+=========*##*+*========+*##=++*#%%@:.                
+                                      @%%%%%%%@============*#+++*=========++%%%%%%%%@-:                
+                                      -*#%@%%%#============*#==+*=========++*@%%@%##+::                
+                                        .::-=%+============*#==+*==========++@=-:::::..                
+                                            :%+++++++++++++*#*++*++++++++++**%+:.                      
+                                            -%+++++++++++++##****++++++++++++##:                       
+                                            :================================::.                      
+                                                                                   
+                        """)
+                        self.print_slow("      You have found Tony’s jacket, a note is inside of a pocket, he opens it and something is written on it “western")
+                        self.print_slow("      avenue” and a phone number the last digit is unreadable, the number is “628 826 129*.")
+                        #falta: guardar o no en el inventario
+                        print("")
+                    
+                    #street signals
+                    if self.player_position == [5,5]:
+                        print("""
+                                    =============----==========-===-------==========-----============
+                                    ---=**##+======-====----=================----====-========--==---
+                                    ----##+*#%%*+=-------==------==-=====-----==-----------------=---
+                                    ====%#+++++*#%#*=----------=++------------------------------=====
+                                    ====%#+++++++++#%%#+=------#%#+=------------::--------------=====
+                                    ====%#+++++++++++++*##*+==%%%%#+-------------------------:--=====
+                                    =--=%#+++++==========++*###*###%*:-------------------------------
+                                    --::*%#*+++++=+==========++*#%##-::-------------------------::::-
+                                    :::::=+*%%#*++++++===========++*##+=:::::-------------------:::::
+                                    ::::------=*#%%#*+===============+*##*+-:-----------=+*##=---::::
+                                    :::::::-------=+*#%#*++==============++###+=--=+*#%%@%%%%#=::::::
+                                    :::::::-------::::-=+*#%#*+============++*#%%%@@%%%%%%%%%#+::::::
+                                    ::-:::::----::::...::::-=*#%#*+====++*#%@@@@%%%%%%%%%%%%%#+-::-::
+                                    :::::::::::::::..:::::::--:.=%*###%@@@@@%%%%%%%%%%%%%%%%%%*-:::::
+                                    ::::::.:::::::....::::::-=+*%%@@%%%%%%%%%%%%%%%%%%%%%%%%%%*=:::::
+                                    .:......:::::::::::=+*#%@@%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%=.....
+                                    .............:-+*#%@%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#*+-......
+                                    ::......:-+*%@@@%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#+=-:.........::
+                                    ::::::.*@@%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#*+=-:::.........::::::
+                                    ::::::.#@%%%%%%%%%%%%%%%%%%%%%%%%%%#*+=-::.......::::::::::::::::
+                                    :--::::%%%%%%%%%%%%%%%%%%%%#%###%#:::::::::::::::-:::::::::::----
+                                    ------:%%%%%%%%%%%%%%%#**+=**#*+=---::---::-:::--:::-:::::-------
+                                    :----::%%%%%%%%%#*+=-::::--#%%#*++::-----::::::--:::----:::------
+                                    ------:*##*+==--:-::::::---*%##*==:------::::::-------::::-------
+                                    -------::::----------------=%##+-----------------------:::-------
+                                    ---::----------------------=%##+-=---------------------------:---
+                                    -::::---------------------:=%##+--::-::---------------------::::-
+                                    ::::--------------------:::-%##+-=:::::::--------------------::::
+                                    ::::--:-----------------:::=%%#+-=:::::::-----------------:--::::
+                                    :::::::--------------------=%%#+-=:::---------------------:::::::
+                                    :::::::-----::::..::::-----=%%#+-=:-:------::::..::::-----:::::::
+                                    ::--:::::---::::::.::::---:-%%#+==::..:---::::.::::::---::::::-::
+                                    ::::::::::::::....:::::::::-%%%*=-....:::::::::....::::::::::::::
+                                    :::::...::::::...::::::::::-%%%*==..::::::::::::...::::::...:::::
+                                    ........::::.:::::::----:::=%%%*==:::::::----:::::::..:::........
+                                    ...................:-------=%%%*+=-----------:...................
+                                    :::::..........:::..:::::::=%%%*++:::::::::::..:::..........:::::
+                                    :::::...........:...:......=%%%*+=...::.....:...............:::::
+                                    :::::....:::::::...........=@%%*+=...............:::::::....:::::
+                                    :--::::::::::::::::::::::::=@@%*++....::::::::::::::::::::::::--:
+                                    ::-:::::::::::::::::.::::::+@@%#*+:::::::::::::::::::::::::::::::
+                                    ::::.....::::::::::....::::+@@%#*+..::::::.....:::::::::.....::::
+                        """)
+                        self.print_slow("      Two paths lie before you. To the left, the 'Soulless Forest' hides secrets within its eerie ")
+                        self.print_slow("      embrace. To the right, 'No Way Out' challenges your resolve. Choose your destiny wisely”")
+                        print("")
+
+                    #Mushroom
+                    if self.player_position == [7,7]:
+                        print("""
+
+                                                      :=+******#*+=:                  
+                                                  .=*%%%#*-.     -#%%*-               
+                                                -#%%##########*#######%%*:            
+                                              =#=:-=+##############***##%%*-          
+                                            =#=.      *#########-.      =##%#-        
+                                          :#%#.       =########:         ###%%*.      
+                                         +%%%%#+-:::-+#########*:     .-*#####%%-     
+                                       .##%%%%##################################%*    
+                                      :%=:#%%%#####**###################*=---=*##%#.  
+                                     :%-.-#%%%%*:     .-*#############-        =##%#. 
+                                    .%*+*%%%%%%.         *###########+         -###%# 
+                                    *%%%%%%%%%%+:        *############-      :+#####%=
+                                    %%%%%%%%%%%%#+=-::-+#################**#########%*
+                                    *%+=---=+#%%%%%%%%#####*-.  .:-##############%%%%=
+                                     **:......-*%%%%%%%%%%*.       .########%*=-::=%* 
+                                      -**=:.....#%%%%%%%%%*:.......-%%%%%%%#-..:=#*-  
+                                        .-*#*=--#%%%%%%%%%%#*====+*%%%%%%%%#+*#*-.    
+                                            .:=+*#%%%%%%%%%%%%%%%%%%%%%%#*+=:.        
+                                                .#+--==-------------:::+*             
+                                                =*-----:::::::::::::::::*=            
+                                               .#=-----:::::::::::::::::-#.           
+                                               +*------::::::::::::::::::*+           
+                                               #+-------:::::::::::::::::=#           
+                                               #+--------::::::::::::::::=#           
+                                               +*---------:::::::::::::::*+           
+                                                *+------------:::::::---+*            
+                                                .**=------------------=**.            
+                                                  -**+=------------=+**-              
+                                                    .-=++**++++**++=-.   
+                        """)
+                        self.print_slow("      Embark on a mind-blowing journey with the psychedelic mushroom that awaits your bravery, adventurer.  ")
+                        self.print_slow("      This mushroom, a treasure of the unknown, immerses you in a world of pleasures, colors and surreal shapes.")
+                        self.print_slow("      Its effects will transport you to impossible landscapes and immerse you in unparalleled visual ecstasy.")
+                        self.print_slow("      But beware, intrepid seeker, for the line between reality and illusion fades.")
+                        print("")
+                        #falta: consumir o dejar el item
+
+                    #coins
+                    if self.player_position == [5,9]:
+                        print("""
+                                                       :*#%%%%%@@@@@@@%+                   
+                                                  *#%%%#++===========++#%%%@@-             
+                                             .**%%+=.........:=============++#%@@=         
+                                           :**++::.......:=====================+*%@+.      
+                                          **++.......:==**+++++++++++**+=========++%@=.    
+                                        **++......==**++=-...:==========+**+=======++@@:   
+                                        %%:.....==++=-.........:============+========#%:   
+                                      ##++:...==**--......::::::=============+*+=====++@@: 
+                                      %%:....:**++.......-*********#%#++=====++**======%%: 
+                                      %%:...==**--.......-*+.....-=*%#++=======**======#%-.
+                                    ##++...:**++.........-*+.:====+#%#++=======++**+===++%@
+                                    %%==..==**==.........-*+.:====+#%#++=========+*+=====%@
+                                    %%==..==**====.....:=+*+.:====+#%#++=========+*+=====%@
+                                    @@======**===========+*+.:====+#%#++=========+*+=====%@
+                                    @@======**===========+*+.:====+#%#++=========+*+=====%@
+                                    @@======##===========+*+.:====+#%#++=========*#+=====%@
+                                    @@======%%===========+*+.:====+#%#++=========#%+=====%@
+                                    ##**====##++=========+*+.:===++#%#++++=====++##+===+*##
+                                      %%====++##++=======+#*++****##%#+++++++++*#*+==++%%: 
+                                      @@**====##**++=====+###########*+++++++**##*+++**%@: 
+                                      ####++==++##**++++==+*********+++++++**##*+++++####. 
+                                        @@**++++++##****++++++++++++++++***##*+++++**%@:   
+                                        *#%#**+++++*##********************#*+++++**#%##.   
+                                          *#%#**+++++++***###########***+++++++**#%##.     
+                                           .##%%****++++++++++++++++++++++++***#%##-       
+                                             .**++%%##****+++++++++++****###%*+**:         
+                                                  ++++=+###############*==+++.                      
+                                                     +++##############*==+           
+                                                     
+                        """)
+                        
+                        self.print_slow("      Coins, the glittering treasures strewn across these lands. These shimmering tokens of wealth and fortune")
+                        self.print_slow("      are scattered far and wide, waiting to be claimed by the intrepid souls who dare to explore every nook and")
+                        self.print_slow("      cranny of this vast forest.")
+                        print("")
+                        #falta: guardar o no en el inventario
+        
+                    #Minigame
+                    if self.player_position == [8,5]:
+                        pass
+
+                    #phone booth
+                    if self.player_position == [8,0]:
+                        print("""
+                                     .::::::::::::::::::::::::::::::::::::::::::::::::::::::::. 
+                                    .=:======================================================:-:
+                                    .--+++++++++++++++++++++++++++++++++++++++++++++++++++++++.-
+                                    .--++++++++++++++++++++++=:    :-  .++++++++++++++++++++++.-
+                                    .--+++++++++++++++++++++:      .-   ++++++++++++++++++++++.-
+                                    .--++++++++++++++++++++        .-   ++++++++++++++++++++++.-
+                                    .--+++++++++++++++++++         .-   ++++++++++++++++++++++.-
+                                    .--++++++++++++++++++          .-   ++++++++++++++++++++++.-
+                                    .--+++++++++++++++++.       ...-=--=++++++++++++++++++++++.-
+                                    .--++++++++++++++++-    .=++++++++++++++++++++++++++++++++.-
+                                    .--++++++++++++++++.    :+++++++++++++++++++++++++++++++++.-
+                                    .--+++++++++++++++=     :+++++++++++++++++++++++++++++++++.-
+                                    .--+++++++++++++++:     :+++++++++++++++++++++++++++++++++.-
+                                    .--+++++++++++++++.     :+++++++++++++++++++++++++++++++++.-
+                                    .--+++++++++++++++.     :+++++++++++++++++++++++++++++++++.-
+                                    .--+++++++++++++++.     :+++++++++++++++++++++++++++++++++.-
+                                    .--+++++++++++++++.     :+++++++++++++++++++++++++++++++++.-
+                                    .--+++++++++++++++-     :+++++++++++++++++++++++++++++++++.-
+                                    .--+++++++++++++++=     :+++++++++++++++++++++++++++++++++.-
+                                    .--++++++++++++++++     :+++++++++++++++++++++++++++++++++.-
+                                    .--++++++++++++++++:    :+++++++++++++++++++++++++++++++++.-
+                                    .--+++++++++++++++++     -=+++++++++++++++++++++++++++++++.-
+                                    .--+++++++++++++++++-          .=::-++++++++++++++++++++++.-
+                                    .--++++++++++++++++++:          =   ++++++++++++++++++++++.-
+                                    .--+++++++++++++++++++.         =   ++++++++++++++++++++++.-
+                                    .--++++++++++++++++++++.        =   ++++++++++++++++++++++.-
+                                    .--+++++++++++++++++++++-       =   ++++++++++++++++++++++.-
+                                    .--+++++++++++++++++++++++-....:=..:++++++++++++++++++++++.-
+                                    .--++++++++++++++++++++++++++++++++++++++++++++++++++++++=.-
+                                     --:::::::::::::::::::::::::::::::::::::::::::::::::::::::- 
+                        """)
+                        #implemntar la verificacion del desarmador
+                        #implemntar la verificacion de la chamarra
+                        #implemntar la verificacion del dinero
+                        #implemntar adivianr el ultimo numero (8 va a ser el numero)
+                        #una vez compltadas esas acciones agregar una parte de historia en texto
+                        #cuando se acabe de mostrar el texto te llevara a la batalla final en [9,4] 
+
+                    #back pack
+                    if self.player_position == [5,9]:
+                        print("""
+ 
+                                                     .=++++++++++-             
+                                                  ..**-:-======:.-*-                    
+                                             :=+++----===================+*=            
+                                           -#*-.                        :*==*           
+                                          -#.                          =#.  ==          
+                                          #:                          -%%#: .#          
+                                         .%                           *=###  *:         
+                                         .#                           #--%%= =+         
+                                         :#                           #-.%%+ .#         
+                                         :*                           #- %%*  %         
+                                         :#   :=+=:           =+=+.   *- %%%  %         
+                                         .%:  *- -*          :#  +=   *- %%%. %         
+                                         .#=++#: -#+++==++===*#  +*+++%. %%%. %.        
+                                         :#  .#: -*          -#  +=  .%  %%%: %.        
+                                         :*  -%: -#+===++++++*#  +%. .%  #%%==%         
+                                         :*  -%:.=+          :#..*%  .%--##+-.%:        
+                                         =*  -#=+=.           :==-%.  %-.     %@=       
+                                         #*  -# .               : #.  %.     :*+@#-     
+                                       =%%*  :#:::.... . . . . .: %.  #:     *%%@@@%*+= 
+                                   :+#%@@@*   .--======+++++++++++-   *-    =*****+*%%- 
+                                   +%*=-. #.                          *- .-=:           
+                                           --=--------::::.........::-#+=-.             
+
+                        """)
+                        self.print_slow("      Ah, the humble yet invaluable backpack, a traveler's trusted companion in this grand odyssey. Crafted with")
+                        self.print_slow("      durable materials and enchanted with the magic of storage, it is more than mere fabric and straps, use it ")
+                        self.print_slow("      with wisdom, not everything can be stored inside of it. Your inventory has increased to 3 slots")
+                        print("")
+                    #ampliar el inventario a 3 items
+
+                    if self.player_position == [9,4]:
+                        pass
+                        #llamar a la funcion End_Game()
+
+                    print("Actual position:", self.player_position)
                     print("")
-                    self.print_slow("      Complete the three riddles to unlock the secret:")
-                    self.print_slow("      First riddle:")
-                    self.print_slow("      This suspense/science fiction series takes place in a made-up town in Indiana in 1983. The name of this iconic")
-                    self.print_slow("      place is similar to the name of a bird. The bird in question belongs to the family Accipitridae. They are mainly")
-                    self.print_slow("      woodland birds that hunt during the day and have high visual acuity. They are known for their sharp talons and beak.")
-                    self.print_slow("      Guess the name of the town:")
-                    print("")
-                    while True:
-                        option = input("Type your guess: ").lower()
-                        if any(keyword in option for keyword in ['hawkins']):
-                            print("")
-                            self.print_slow("      Very nice! You have completed the first riddle.")
-                            self.print_slow("      Second riddle:")
-                            self.print_slow("      I am a shadow, a whisper in the night, I follow a number through her mind. I am the between worlds might.")
-                            self.print_slow("      I control the hive, Who am I, that brings Hawkins and soon the world, in such pain?")
-                            self.print_slow("      Guess its name:")
-                            print("")
-                            while True:
-                                option = input("       Type your guess: ").lower()
-                                if any(keyword in option for keyword in ['vecna']):
-                                    print("")
-                                    self.print_slow("      Oh! You're on fire, you have completed the second riddle.")
-                                    self.print_slow("      Third riddle:")
-                                    self.print_slow("      A outside-world creature based on a D&D character which hunts some of their preys in the middle of the")
-                                    self.print_slow("      night, travels between worlds, its mouth opens like a flower, its weakness it’s a person called as a ")
-                                    self.print_slow("      number and fire. Type the creature's name: ")
-                                    print("")
-                                    while True:
-                                        option = input("       Type your guess: ").lower()
-                                        if any(keyword in option for keyword in ['demogorgon']):
-                                            self.print_slow("      Congratulations! You have completed all riddles.")
-                                            self.easter_egg2()
-                                            break
-                                        else:
-                                            print("Not the word we're looking for.\n")
-                                    break
-                                else:
-                                    print("Not the word we're looking for.\n")
-                            break
-                        else:
-                            print("Not the word we're looking for.\n")
                 else:
                     print("Invalid input. Please try again.")
-                    
-
-                
-                print("Actual position:", self.player_position)
-                print("")
             else:
-                print("Invalid input. Please try again.")
-        
+                print("Game Over") #agregar ascii art de game over 
+                exit(0)
+
 vg = Videogame()
 vg.Title()

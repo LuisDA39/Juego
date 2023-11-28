@@ -6,7 +6,7 @@ class Videogame():
     def __init__(self):
         self.health = 100 #limitar la vida, no puede llegar a mas de 100 pts
         self.inventory = [] #crear el inventario
-        self.player_position = [0,3]
+        self.player_position = [9,8]
         self.map = [
             [0, 0, 0, 0, 0, 1, 0, 0, 1, 0],
             [0, 1, 0, 0, 1, 1, 0, 1, 0, 0],
@@ -597,6 +597,8 @@ class Videogame():
         """)
 
     def End_Game(self):
+        file_path = r'C:\Users\lloyd\Downloads\Y2meta.app - Pokemon Pueblo Lavanda Version Japonesa (Original) (128 kbps).mp3'
+        self.play_music(file_path)
         pass
     #crear historia y minijuego final
 
@@ -817,7 +819,7 @@ class Videogame():
                         """)
                         print ("You have found an apple, they help you to restore your health by 5 points, you can save them for later, each takes one slot ")
                         print("")
-                        #falta: comer o dejarla
+                        #falta: guardar o no en el inventario
 
                     #screwdriver    
                     if self.player_position == [2,1]:
@@ -887,12 +889,12 @@ class Videogame():
                                     ...%%....%%..%%..%%.....                                
                                     ...%%....%%..%%..%%%%%%.                                
                                     ........................                                
-                                    ..%%%%...%%%%%....%%%%....%%%%...%%%%%%.                
-                                    .%%......%%..%%..%%..%%..%%..%%..%%.....                
-                                    ..%%%%...%%%%%...%%%%%%..%%......%%%%...                
-                                    .....%%..%%......%%..%%..%%..%%..%%.....                
-                                    ..%%%%...%%......%%..%%...%%%%...%%%%%%.                
-                                    ........................................                       
+                                    .%%%%%%...%%%%...%%%%%...%%%%%%..%%..%%.                
+                                    .%%......%%..%%..%%..%%....%%....%%..%%.                
+                                    .%%%%....%%%%%%..%%%%%.....%%....%%%%%%.                
+                                    .%%......%%..%%..%%..%%....%%....%%..%%.                
+                                    .%%%%%%..%%..%%..%%..%%....%%....%%..%%.                
+                                    ........................................                                       
                         """)
 
                         print("")

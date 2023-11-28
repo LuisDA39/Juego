@@ -599,7 +599,35 @@ class Videogame():
     def End_Game(self):
         file_path = r'C:\Users\lloyd\Downloads\Y2meta.app - Pokemon Pueblo Lavanda Version Japonesa (Original) (128 kbps).mp3'
         self.play_music(file_path)
-        pass
+
+        self.print_slow("      Tony calls his mom, 'Hi… Hi… mom?... are you there?' Tony’s mom answers with a broken voice, 'Honey, so ")
+        self.print_slow("      good I can hear your voice. Where are you? What happened? …I…I miss you so much. ")
+        print("")
+        self.print_slow("      Tony answers, 'Mom, I’m in a place called the Soulless Forest. I woke up in a strange cabin. I managed to")
+        self.print_slow("      escape, but I don’t know what to do. …I’m afraid, mom. I need you.' ")
+        print("")
+        self.print_slow("      The call is jamming, and an evil voice starts mumbling, 'What’s up, little guy?' (The Keeper is talking to")
+        self.print_slow("      Tony) 'I’m going to find you. Where are you…? Where are you…? Tony, where are you…? Oh! I think I see you. '")
+        print("")
+        self.print_slow("      Tony starts running, dodging many trees on his way. He thinks he’s safe, but he’s not. He finds himself on ")
+        self.print_slow("      a dead-end path. ")
+        print("")
+        print("""
+                                          ███████╗██╗███╗   ██╗ █████╗ ██╗                  
+                                          ██╔════╝██║████╗  ██║██╔══██╗██║                  
+                                          █████╗  ██║██╔██╗ ██║███████║██║                  
+                                          ██╔══╝  ██║██║╚██╗██║██╔══██║██║                  
+                                          ██║     ██║██║ ╚████║██║  ██║███████╗             
+                                          ╚═╝     ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚══════╝             
+                                                  
+                                    ██████╗  █████╗ ████████╗████████╗██╗     ███████╗
+                                    ██╔══██╗██╔══██╗╚══██╔══╝╚══██╔══╝██║     ██╔════╝
+                                    ██████╔╝███████║   ██║      ██║   ██║     █████╗  
+                                    ██╔══██╗██╔══██║   ██║      ██║   ██║     ██╔══╝  
+                                    ██████╔╝██║  ██║   ██║      ██║   ███████╗███████╗
+                                    ╚═════╝ ╚═╝  ╚═╝   ╚═╝      ╚═╝   ╚══════╝╚══════╝
+        """)
+        
     #crear historia y minijuego final
 
     def Title(self):
@@ -1332,8 +1360,8 @@ class Videogame():
                     #ampliar el inventario a 3 items
 
                     if self.player_position == [9,4]:
-                        pass
-                        #llamar a la funcion End_Game()
+                        self.End_Game()
+                        self.print_slow("      Starting . . .")
 
                     print("Actual position:", self.player_position)
                     print("")

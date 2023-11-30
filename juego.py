@@ -30,7 +30,7 @@ class Videogame():
     def print_slow(self, text):
         for char in text:
             print(char, end = '', flush = True)
-            time.sleep(0.0009)
+            time.sleep(0.0005)
         print()
 
     def path_A(self):
@@ -648,7 +648,9 @@ class Videogame():
                                     ▀▀▀ ▀ ▀ ▀▀▀  ▀  ▀ ▀ ▀▀▀ ▀▀▀  ▀  ▀▀▀ ▀▀▀ ▀ ▀ ▀▀▀
          """)
          self.print_slow("        Hey there, friend! Welcome to this twisted tale—it's a mix of entertainment, horror, and sheer")
-         self.print_slow("        confusion...hope you enjoy the ride, understand the road and take the best path. Bonne chance!") 
+         self.print_slow("        confusion...hope you enjoy the ride, understand the road and take the best path. ")
+         self.print_slow("        Your adventure starts with 100 points of health, if the game you want to continue palying ")
+         self.print_slow("        recommended is your health mantaining. Bonne chance!")
          print("")
          self.print_slow("        When faced with choices, just type the suggested word to make your selection and discover the optimal")
          self.print_slow("        path ahead. Your options will show after a sequence, the suggested word will be betweeen brackets.")
@@ -759,6 +761,8 @@ class Videogame():
                 
 
             if self.health > 0 and self.health <= 100:
+                #si pones un input invalido imprime 'invalid input' pero si pones uno correcto te mueve pero 
+                # tambien te imprime el mensaje 'invalid input'
                 option = input("Type 'up', 'down', 'left', or 'right' to move ").lower()
                 if option in ['up', 'down', 'left', 'right']:
                     if option == 'up' and x > 0 and self.map[x - 1][y] != 1:
@@ -1336,14 +1340,13 @@ class Videogame():
                         self.print_slow("      with wisdom, not everything can be stored inside of it. Your inventory has increased to 3 slots")
                         print("")
                     #ampliar el inventario a 3 items
- 
 
                     print("Actual position:", self.player_position)
                     print("")
                 else:
                     print("Invalid input. Please try again.")
             else:
-                print("Game Over") #agregar ascii art de game over 
+                self.Game_Over() 
                 exit(0)
 
 vg = Videogame()

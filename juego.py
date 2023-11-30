@@ -6,7 +6,7 @@ class Videogame():
     def __init__(self):
         self.health = 100 #limitar la vida, no puede llegar a mas de 100 pts
         self.inventory = [] #crear el inventario
-        self.player_position = [8,0]
+        self.player_position = [0,3]
         self.map = [
             [0, 0, 0, 0, 0, 1, 0, 0, 1, 0],
             [0, 1, 0, 0, 1, 1, 0, 1, 0, 0],
@@ -30,7 +30,7 @@ class Videogame():
     def print_slow(self, text):
         for char in text:
             print(char, end = '', flush = True)
-            time.sleep(0.0001)
+            time.sleep(0.0009)
         print()
 
     def path_A(self):
@@ -295,30 +295,7 @@ class Videogame():
         self.print_slow("      Tony couldn’t fight anymore with the nightmares. His valiant struggle for air ended as the suffocating  ")
         self.print_slow("      embrace of the thought silenced his fight, and his consciousness slipped away into the abyss.")
         self.print_slow("      loading . . .")
-        print("""
-
-                              ▄████  ▄▄▄       ███▄ ▄███▓▓█████ 
-                             ██▒ ▀█▒▒████▄    ▓██▒▀█▀ ██▒▓█   ▀ 
-                            ▒██░▄▄▄░▒██  ▀█▄  ▓██    ▓██░▒███   
-                            ░▓█  ██▓░██▄▄▄▄██ ▒██    ▒██ ▒▓█  ▄ 
-                            ░▒▓███▀▒ ▓█   ▓██▒▒██▒   ░██▒░▒████▒
-                             ░▒   ▒  ▒▒   ▓▒█░░ ▒░   ░  ░░░ ▒░ ░
-                              ░   ░   ▒   ▒▒ ░░  ░      ░ ░ ░  ░
-                            ░ ░   ░   ░   ▒   ░      ░      ░   
-                                  ░       ░  ░       ░      ░  ░
-                                    
-                             ▒█████   ██▒   █▓▓█████  ██▀███    
-                            ▒██▒  ██▒▓██░   █▒▓█   ▀ ▓██ ▒ ██▒  
-                            ▒██░  ██▒ ▓██  █▒░▒███   ▓██ ░▄█ ▒  
-                            ▒██   ██░  ▒██ █░░▒▓█  ▄ ▒██▀▀█▄    
-                            ░ ████▓▒░   ▒▀█░  ░▒████▒░██▓ ▒██▒  
-                            ░ ▒░▒░▒░    ░ ▐░  ░░ ▒░ ░░ ▒▓ ░▒▓░  
-                              ░ ▒ ▒░    ░ ░░   ░ ░  ░  ░▒ ░ ▒░  
-                            ░ ░ ░ ▒       ░░     ░     ░░   ░   
-                                ░ ░        ░     ░  ░   ░       
-        
-                     
-        """)
+        self.Game_Over()
         return
 
     def path_O(self):
@@ -326,30 +303,7 @@ class Videogame():
         self.print_slow("      Tragically, Tony succumbed to the poisoned sandwich, the unsuspecting meal sealing his fate. As the")
         self.print_slow("      toxin took hold, his strength waned, and the world faded into darkness. His valiant efforts were in ")
         self.print_slow("      vain, lost to the sinister ploy hidden within the innocent offering.")
-        print("""
-
-                              ▄████  ▄▄▄       ███▄ ▄███▓▓█████ 
-                             ██▒ ▀█▒▒████▄    ▓██▒▀█▀ ██▒▓█   ▀ 
-                            ▒██░▄▄▄░▒██  ▀█▄  ▓██    ▓██░▒███   
-                            ░▓█  ██▓░██▄▄▄▄██ ▒██    ▒██ ▒▓█  ▄ 
-                            ░▒▓███▀▒ ▓█   ▓██▒▒██▒   ░██▒░▒████▒
-                             ░▒   ▒  ▒▒   ▓▒█░░ ▒░   ░  ░░░ ▒░ ░
-                              ░   ░   ▒   ▒▒ ░░  ░      ░ ░ ░  ░
-                            ░ ░   ░   ░   ▒   ░      ░      ░   
-                                  ░       ░  ░       ░      ░  ░
-                                    
-                             ▒█████   ██▒   █▓▓█████  ██▀███    
-                            ▒██▒  ██▒▓██░   █▒▓█   ▀ ▓██ ▒ ██▒  
-                            ▒██░  ██▒ ▓██  █▒░▒███   ▓██ ░▄█ ▒  
-                            ▒██   ██░  ▒██ █░░▒▓█  ▄ ▒██▀▀█▄    
-                            ░ ████▓▒░   ▒▀█░  ░▒████▒░██▓ ▒██▒  
-                            ░ ▒░▒░▒░    ░ ▐░  ░░ ▒░ ░░ ▒▓ ░▒▓░  
-                              ░ ▒ ▒░    ░ ░░   ░ ░  ░  ░▒ ░ ▒░  
-                            ░ ░ ░ ▒       ░░     ░     ░░   ░   
-                                ░ ░        ░     ░  ░   ░       
-        
-                     
-        """)
+        self.Game_Over()
         return
 
     def path_P(self):
@@ -420,31 +374,7 @@ class Videogame():
         self.print_slow("      Tony, the resurgence of a fever igniting within him. The creature slithered back into his ")
         self.print_slow("      consciousness, leeching on his memories until they dwindled to nothingness, leaving Tony's mind ")
         self.print_slow("      a blank canvas, devoid of his once vibrant past ")
-        print("""
-
-
-                              ▄████  ▄▄▄       ███▄ ▄███▓▓█████ 
-                             ██▒ ▀█▒▒████▄    ▓██▒▀█▀ ██▒▓█   ▀ 
-                            ▒██░▄▄▄░▒██  ▀█▄  ▓██    ▓██░▒███   
-                            ░▓█  ██▓░██▄▄▄▄██ ▒██    ▒██ ▒▓█  ▄ 
-                            ░▒▓███▀▒ ▓█   ▓██▒▒██▒   ░██▒░▒████▒
-                             ░▒   ▒  ▒▒   ▓▒█░░ ▒░   ░  ░░░ ▒░ ░
-                              ░   ░   ▒   ▒▒ ░░  ░      ░ ░ ░  ░
-                            ░ ░   ░   ░   ▒   ░      ░      ░   
-                                  ░       ░  ░       ░      ░  ░
-                                    
-                             ▒█████   ██▒   █▓▓█████  ██▀███    
-                            ▒██▒  ██▒▓██░   █▒▓█   ▀ ▓██ ▒ ██▒  
-                            ▒██░  ██▒ ▓██  █▒░▒███   ▓██ ░▄█ ▒  
-                            ▒██   ██░  ▒██ █░░▒▓█  ▄ ▒██▀▀█▄    
-                            ░ ████▓▒░   ▒▀█░  ░▒████▒░██▓ ▒██▒  
-                            ░ ▒░▒░▒░    ░ ▐░  ░░ ▒░ ░░ ▒▓ ░▒▓░  
-                              ░ ▒ ▒░    ░ ░░   ░ ░  ░  ░▒ ░ ▒░  
-                            ░ ░ ░ ▒       ░░     ░     ░░   ░   
-                                ░ ░        ░     ░  ░   ░       
-        
-                     
-        """)
+        self.Game_Over()
         return
 
     def path_T(self):
@@ -630,6 +560,35 @@ class Videogame():
         
     #crear historia y minijuego final
 
+    def Game_Over(self):
+        print("""
+
+
+                              ▄████  ▄▄▄       ███▄ ▄███▓▓█████ 
+                             ██▒ ▀█▒▒████▄    ▓██▒▀█▀ ██▒▓█   ▀ 
+                            ▒██░▄▄▄░▒██  ▀█▄  ▓██    ▓██░▒███   
+                            ░▓█  ██▓░██▄▄▄▄██ ▒██    ▒██ ▒▓█  ▄ 
+                            ░▒▓███▀▒ ▓█   ▓██▒▒██▒   ░██▒░▒████▒
+                             ░▒   ▒  ▒▒   ▓▒█░░ ▒░   ░  ░░░ ▒░ ░
+                              ░   ░   ▒   ▒▒ ░░  ░      ░ ░ ░  ░
+                            ░ ░   ░   ░   ▒   ░      ░      ░   
+                                  ░       ░  ░       ░      ░  ░
+                                    
+                             ▒█████   ██▒   █▓▓█████  ██▀███    
+                            ▒██▒  ██▒▓██░   █▒▓█   ▀ ▓██ ▒ ██▒  
+                            ▒██░  ██▒ ▓██  █▒░▒███   ▓██ ░▄█ ▒  
+                            ▒██   ██░  ▒██ █░░▒▓█  ▄ ▒██▀▀█▄    
+                            ░ ████▓▒░   ▒▀█░  ░▒████▒░██▓ ▒██▒  
+                            ░ ▒░▒░▒░    ░ ▐░  ░░ ▒░ ░░ ▒▓ ░▒▓░  
+                              ░ ▒ ▒░    ░ ░░   ░ ░  ░  ░▒ ░ ▒░  
+                            ░ ░ ░ ▒       ░░     ░     ░░   ░   
+                                ░ ░        ░     ░  ░   ░       
+        
+                     
+        """)
+        
+
+
     def Title(self):
         file_path = r'C:\Users\lloyd\Downloads\Y2meta.app - Billie Eilish - everything i wanted (Official Instrumental) (128 kbps).mp3'
         self.play_music(file_path) 
@@ -781,6 +740,8 @@ class Videogame():
 
         self.print_slow("      You've unlocked the next stage. Welcome to the Soulless Forest. Navigate by typing 'left,'right,' 'up,' or ")
         self.print_slow("      'down.' You now have an inventory to store items; it starts with a single slot, but maybe you can expand it.")
+        self.print_slow("      'Suggestion: draw a map on which ever desired place because there won't be shown any map.")
+        print("")
         self.print_slow("      Best of luck with the looming mysteries ahead. Survival is in your hands. ")
         print("")
         print("")

@@ -6,7 +6,7 @@ class Videogame():
     def __init__(self):
         self.health = 100 #limitar la vida, no puede llegar a mas de 100 pts
         self.inventory = [] #crear el inventario
-        self.player_position = [9,8]
+        self.player_position = [8,0]
         self.map = [
             [0, 0, 0, 0, 0, 1, 0, 0, 1, 0],
             [0, 1, 0, 0, 1, 1, 0, 1, 0, 0],
@@ -785,12 +785,17 @@ class Videogame():
         print("")
         print("")
 
-    def Map(self):
-            pass
-
     def move_player(self):
         while True:
             x, y = self.player_position
+
+            if self.health > 100:
+                self.health = 100
+            
+            if self.player_position == [9, 4]:
+                self.End_Game()
+                self.print_slow("Starting . . .")
+                
 
             if self.health > 0 and self.health <= 100:
                 option = input("Type 'up', 'down', 'left', or 'right' to move ").lower()
@@ -1323,7 +1328,19 @@ class Videogame():
                         #implemntar la verificacion del dinero
                         #implemntar adivianr el ultimo numero (8 va a ser el numero)
                         #una vez compltadas esas acciones agregar una parte de historia en texto
-                        #cuando se acabe de mostrar el texto te llevara a la batalla final en [9,4] 
+                        #cuando se acabe de mostrar el texto te llevara a la batalla final en [9,4]
+                        # 
+                        self.print_slow("Type your guess or type 'Out' to not take the quest: ")#esto solo es una prueba
+                        while True:
+                            option = input().lower()
+                            if option == 'space':
+                               self.player_position = [9,4]
+                               break
+                            if option == 'out':
+                               break
+                            else:
+                                print("Give it another thought\n")
+                                time.sleep(1)
 
                     #back pack
                     if self.player_position == [5,9]:
@@ -1358,10 +1375,7 @@ class Videogame():
                         self.print_slow("      with wisdom, not everything can be stored inside of it. Your inventory has increased to 3 slots")
                         print("")
                     #ampliar el inventario a 3 items
-
-                    if self.player_position == [9,4]:
-                        self.End_Game()
-                        self.print_slow("      Starting . . .")
+ 
 
                     print("Actual position:", self.player_position)
                     print("")

@@ -2,11 +2,13 @@ import os
 import time
 import pygame
 
-class Videogame():
+
+class Videogame:
     def __init__(self):
-        self.health = 100 #limitar la vida, no puede llegar a mas de 100 pts
-        self.inventory = [] #crear el inventario
-        self.player_position = [0,3]
+        self.health = 100  # limitar la vida, no puede llegar a mas de 100 pts
+        self.inventory = []  # crear el inventario
+        self.max_cap = 1
+        self.player_position = [0, 3]
         self.map = [
             [0, 0, 0, 0, 0, 1, 0, 0, 1, 0],
             [0, 1, 0, 0, 1, 1, 0, 1, 0, 0],
@@ -25,11 +27,11 @@ class Videogame():
         pygame.mixer.init()
         pygame.mixer.music.load(file_path)
         pygame.mixer.music.play()
-        #falta: alargar la duracion de las canciones
+        # falta: alargar la duracion de las canciones
 
     def print_slow(self, text):
         for char in text:
-            print(char, end = '', flush = True)
+            print(char, end='', flush=True)
             time.sleep(0.0005)
         print()
 
@@ -48,7 +50,7 @@ class Videogame():
             if any(keyword in op for keyword in ['break', 'kick', 'spring']):
                 if op == 'break':
                     self.print_slow("processing...")
-                    self.path_C()  
+                    self.path_C()
                     break
                 if op == 'kick':
                     self.print_slow("processing...")
@@ -61,7 +63,7 @@ class Videogame():
             else:
                 print("Not the word we're looking for\n")
                 time.sleep(1)
-    
+
     def path_B(self):
         print("")
         self.print_slow("      Tony attempts to sever the rope, but a misjudged move results in a perilous gash across his hand, blood trickling as ")
@@ -90,62 +92,62 @@ class Videogame():
                 time.sleep(1)
 
     def path_C(self):
-            print("")
-            self.print_slow("      Tony breaks the window, unluckily for him, there was a grill outside the window, The Keeper listened to all the ")
-            self.print_slow("      noise he made, he is coming…  ")
-            print("                Use the stick to strike the Keeper [Strike]")
-            print("                Make a run for it [Run]")
-            print("                Let yourself be caught [caught]")
+        print("")
+        self.print_slow("      Tony breaks the window, unluckily for him, there was a grill outside the window, The Keeper listened to all the ")
+        self.print_slow("      noise he made, he is coming…  ")
+        print("                Use the stick to strike the Keeper [Strike]")
+        print("                Make a run for it [Run]")
+        print("                Let yourself be caught [caught]")
 
-            while True:
-                option = input("Type: ")
-                op = option.lower()
+        while True:
+            option = input("Type: ")
+            op = option.lower()
 
-                if any(keyword in op for keyword in ['strike', 'run', 'caught']):
-                    if op == 'strike':
-                        self.print_slow("processing...")
-                        self.path_H()
-                        break
-                    if op == 'run':
-                        self.print_slow("processing...")
-                        self.path_I()
-                        break
-                    if op == 'caught':
-                        self.print_slow("processing...")
-                        self.path_J()
-                        break
-                else:
-                    print("Not the word we're looking for\n")
-                    time.sleep(1)
+            if any(keyword in op for keyword in ['strike', 'run', 'caught']):
+                if op == 'strike':
+                    self.print_slow("processing...")
+                    self.path_H()
+                    break
+                if op == 'run':
+                    self.print_slow("processing...")
+                    self.path_I()
+                    break
+                if op == 'caught':
+                    self.print_slow("processing...")
+                    self.path_J()
+                    break
+            else:
+                print("Not the word we're looking for\n")
+                time.sleep(1)
 
     def path_D(self):
-            print("")
-            self.print_slow("      Tony kicks repeatedly the door, he’s making way too much noise, he wasn’t able to break it, The Keeper is coming…  ")
-            print("                Use the stick to strike the Keeper [Strike]")
-            print("                Make a run for it [Run]")
-            print("                Let yourself be caught [Caught]")
+        print("")
+        self.print_slow("      Tony kicks repeatedly the door, he’s making way too much noise, he wasn’t able to break it, The Keeper is coming…  ")
+        print("                Use the stick to strike the Keeper [Strike]")
+        print("                Make a run for it [Run]")
+        print("                Let yourself be caught [Caught]")
 
-            while True:
-                option = input("Type: ")
-                op = option.lower()
+        while True:
+            option = input("Type: ")
+            op = option.lower()
 
-                if any(keyword in op for keyword in ['strike', 'run', 'caught']):
-                    if op == 'strike':
-                        self.print_slow("processing...")
-                        self.path_H()
-                        break
-                    if op == 'run':
-                        self.print_slow("processing...")
-                        self.path_I()
-                        break
-                    if op == 'caught':
-                        self.print_slow("processing...")
-                        self.path_J()
-                        break
-                else:
-                    print("Not the word we're looking for\n")
-                    time.sleep(1)
-    
+            if any(keyword in op for keyword in ['strike', 'run', 'caught']):
+                if op == 'strike':
+                    self.print_slow("processing...")
+                    self.path_H()
+                    break
+                if op == 'run':
+                    self.print_slow("processing...")
+                    self.path_I()
+                    break
+                if op == 'caught':
+                    self.print_slow("processing...")
+                    self.path_J()
+                    break
+            else:
+                print("Not the word we're looking for\n")
+                time.sleep(1)
+
     def path_E(self):
         print("")
         self.print_slow("      Tony molded the spring on a perfect shape and used it to open the door, Tony is free, he runs as fast as he can")
@@ -185,25 +187,25 @@ class Videogame():
         print("                Let yourself be caught [Caught]")
 
         while True:
-                option = input("Type: ")
-                op = option.lower()
+            option = input("Type: ")
+            op = option.lower()
 
-                if any(keyword in op for keyword in ['strike', 'run', 'caught']):
-                    if op == 'strike':
-                        self.print_slow("processing...")
-                        self.path_H()
-                        break
-                    if op == 'run':
-                        self.print_slow("processing...")
-                        self.path_I()
-                        break
-                    if op == 'caught':
-                        self.print_slow("processing...")
-                        self.path_J()
-                        break
-                else:
-                    print("Not the word we're looking for\n")
-                    time.sleep(1)
+            if any(keyword in op for keyword in ['strike', 'run', 'caught']):
+                if op == 'strike':
+                    self.print_slow("processing...")
+                    self.path_H()
+                    break
+                if op == 'run':
+                    self.print_slow("processing...")
+                    self.path_I()
+                    break
+                if op == 'caught':
+                    self.print_slow("processing...")
+                    self.path_J()
+                    break
+            else:
+                print("Not the word we're looking for\n")
+                time.sleep(1)
 
     def path_H(self):
         print("")
@@ -213,7 +215,7 @@ class Videogame():
         print("")
         self.unlock_map()
         self.move_player()
-    
+
     def path_I(self):
         print("")
         self.print_slow("      In a fit of frustration, he unleashed an attack of rage, furiously kicked the mattress and a hidden void beneath")
@@ -236,7 +238,7 @@ class Videogame():
         print("")
         self.unlock_map()
         self.move_player()
-    
+
     def path_L(self):
         print("")
         self.print_slow("      Tony drifted into an uneasy slumber, yet this time, his dreams took a terrifying turn. A malevolent ")
@@ -248,21 +250,21 @@ class Videogame():
         print("                Give up [Give up]")
 
         while True:
-                option = input("Type: ")
-                op = option.lower()
+            option = input("Type: ")
+            op = option.lower()
 
-                if any(keyword in op for keyword in ['continue', 'give up']):
-                    if op == 'continue':
-                        self.print_slow("processing...")
-                        self.path_M()
-                        break
-                    if op == 'give up':
-                        self.print_slow("processing...")
-                        self.path_N()
-                        break
-                else:
-                    print("Not the word we're looking for\n")
-                    time.sleep(1)
+            if any(keyword in op for keyword in ['continue', 'give up']):
+                if op == 'continue':
+                    self.print_slow("processing...")
+                    self.path_M()
+                    break
+                if op == 'give up':
+                    self.print_slow("processing...")
+                    self.path_N()
+                    break
+            else:
+                print("Not the word we're looking for\n")
+                time.sleep(1)
 
     def path_M(self):
         print("")
@@ -274,21 +276,21 @@ class Videogame():
         print("                Eat the hash browns [Hash browns]")
 
         while True:
-                option = input("Type: ")
-                op = option.lower()
+            option = input("Type: ")
+            op = option.lower()
 
-                if any(keyword in op for keyword in ['sandwich', 'hash browns']):
-                    if op == 'sandwich':
-                        self.print_slow("processing...")
-                        self.path_O()
-                        break
-                    if op == 'hash browns':
-                        self.print_slow("processing...")
-                        self.path_P()
-                        break
-                else:
-                    print("Not the word we're looking for\n")
-                    time.sleep(1)
+            if any(keyword in op for keyword in ['sandwich', 'hash browns']):
+                if op == 'sandwich':
+                    self.print_slow("processing...")
+                    self.path_O()
+                    break
+                if op == 'hash browns':
+                    self.print_slow("processing...")
+                    self.path_P()
+                    break
+            else:
+                print("Not the word we're looking for\n")
+                time.sleep(1)
 
     def path_N(self):
         print("")
@@ -315,21 +317,21 @@ class Videogame():
         print("                do nothing  [Nothing]")
 
         while True:
-                option = input("Type: ")
-                op = option.lower()
+            option = input("Type: ")
+            op = option.lower()
 
-                if any(keyword in op for keyword in ['advantage', 'nothing']):
-                    if op == 'advantage':
-                        self.print_slow("processing...")
-                        self.path_Q()
-                        break
-                    if op == 'nothing':
-                        self.print_slow("processing...")
-                        self.path_R()
-                        break
-                else:
-                    print("Not the word we're looking for\n")
-                    time.sleep(1)
+            if any(keyword in op for keyword in ['advantage', 'nothing']):
+                if op == 'advantage':
+                    self.print_slow("processing...")
+                    self.path_Q()
+                    break
+                if op == 'nothing':
+                    self.print_slow("processing...")
+                    self.path_R()
+                    break
+            else:
+                print("Not the word we're looking for\n")
+                time.sleep(1)
 
     def path_Q(self):
         print("")
@@ -350,21 +352,21 @@ class Videogame():
         print("                Find another way out  [Find]")
 
         while True:
-                option = input("Type: ")
-                op = option.lower()
+            option = input("Type: ")
+            op = option.lower()
 
-                if any(keyword in op for keyword in ['attention', 'find']):
-                    if op == 'attention':
-                        self.print_slow("processing...")
-                        self.path_S()
-                        break
-                    if op == 'find':
-                        self.print_slow("processing...")
-                        self.path_T()
-                        break
-                else:
-                    print("Not the word we're looking for\n")
-                    time.sleep(1)
+            if any(keyword in op for keyword in ['attention', 'find']):
+                if op == 'attention':
+                    self.print_slow("processing...")
+                    self.path_S()
+                    break
+                if op == 'find':
+                    self.print_slow("processing...")
+                    self.path_T()
+                    break
+            else:
+                print("Not the word we're looking for\n")
+                time.sleep(1)
 
     def path_S(self):
         print("")
@@ -388,7 +390,7 @@ class Videogame():
         self.move_player()
 
     def easter_egg1(self):
-        file_path = r'C:\Users\lloyd\Downloads\WhatsApp Audio 2023-11-25 at 15.51.39.mpeg'
+        file_path = r'Rasputin.mpeg'
         self.play_music(file_path)
         print("""
 
@@ -466,7 +468,7 @@ class Videogame():
         """)
 
     def easter_egg2(self):
-        file_path = r'C:\Users\lloyd\Downloads\Y2meta.app - Stranger Things _ Season 1 _ Opening - Intro HD (128 kbps).mp3'
+        file_path = r'stranger_things.mp3'
         self.play_music(file_path)
         print("""
                                                                              :=++**:                                      
@@ -527,7 +529,7 @@ class Videogame():
         """)
 
     def End_Game(self):
-        file_path = r'C:\Users\lloyd\Downloads\Y2meta.app - Pokemon Pueblo Lavanda Version Japonesa (Original) (128 kbps).mp3'
+        file_path = r'lavender.mp3'
         self.play_music(file_path)
 
         self.print_slow("      Tony calls his mom, 'Hi… Hi… mom?... are you there?' Tony’s mom answers with a broken voice, 'Honey, so ")
@@ -557,7 +559,7 @@ class Videogame():
                                     ██████╔╝██║  ██║   ██║      ██║   ███████╗███████╗
                                     ╚═════╝ ╚═╝  ╚═╝   ╚═╝      ╚═╝   ╚══════╝╚══════╝
         """)
-        
+
     #crear historia y minijuego final
 
     def Game_Over(self):
@@ -586,12 +588,10 @@ class Videogame():
         
                      
         """)
-        
-
 
     def Title(self):
-        file_path = r'C:\Users\lloyd\Downloads\Y2meta.app - Billie Eilish - everything i wanted (Official Instrumental) (128 kbps).mp3'
-        self.play_music(file_path) 
+        file_path = r'everything i wanted.mp3'
+        self.play_music(file_path)
 
         print("""
                          
@@ -620,7 +620,6 @@ class Videogame():
                           \=================================================================/
         """)
 
-
         print("""
                                                   █▀▀ ▀█▀ █▀█ █▀▄ ▀█▀
                                                   ▀▀█  █  █▀█ █▀▄  █
@@ -641,28 +640,28 @@ class Videogame():
                 time.sleep(1)
 
     def Instructions(self):
-         print("")
-         print("""
+        print("")
+        print("""
                                     ▀█▀ █▀█ █▀▀ ▀█▀ █▀▄ █ █ █▀▀ ▀█▀ ▀█▀ █▀█ █▀█ █▀▀
                                      █  █ █ ▀▀█  █  █▀▄ █ █ █    █   █  █ █ █ █ ▀▀█
                                     ▀▀▀ ▀ ▀ ▀▀▀  ▀  ▀ ▀ ▀▀▀ ▀▀▀  ▀  ▀▀▀ ▀▀▀ ▀ ▀ ▀▀▀
          """)
-         self.print_slow("        Hey there, friend! Welcome to this twisted tale—it's a mix of entertainment, horror, and sheer")
-         self.print_slow("        confusion...hope you enjoy the ride, understand the road and take the best path. ")
-         self.print_slow("        Your adventure starts with 100 points of health, if the game you want to continue palying ")
-         self.print_slow("        recommended is your health mantaining. Bonne chance!")
-         print("")
-         self.print_slow("        When faced with choices, just type the suggested word to make your selection and discover the optimal")
-         self.print_slow("        path ahead. Your options will show after a sequence, the suggested word will be betweeen brackets.")
-         self.print_slow("        For exmaple: What do you like?")
-         self.print_slow("        To eat pizza [pizza]")
-         self.print_slow("        Playing Cabin Fever [playing]")
-         self.print_slow("        word typed: playing ")
-         print("")
-         self.print_slow("        LET THE ADVENTURE BEGIN! ")
+        self.print_slow("        Hey there, friend! Welcome to this twisted tale—it's a mix of entertainment, horror, and sheer")
+        self.print_slow("        confusion...hope you enjoy the ride, understand the road and take the best path. ")
+        self.print_slow("        Your adventure starts with 100 points of health, if the game you want to continue palying ")
+        self.print_slow("        recommended is your health mantaining. Bonne chance!")
+        print("")
+        self.print_slow("        When faced with choices, just type the suggested word to make your selection and discover the optimal")
+        self.print_slow("        path ahead. Your options will show after a sequence, the suggested word will be betweeen brackets.")
+        self.print_slow("        For exmaple: What do you like?")
+        self.print_slow("        To eat pizza [pizza]")
+        self.print_slow("        Playing Cabin Fever [playing]")
+        self.print_slow("        word typed: playing ")
+        print("")
+        self.print_slow("        LET THE ADVENTURE BEGIN! ")
 
-         print("")
-         self.Start_game()
+        print("")
+        self.Start_game()
 
     def Start_game(self):
         print("""
@@ -754,16 +753,14 @@ class Videogame():
 
             if self.health > 100:
                 self.health = 100
-            
+
             if self.player_position == [9, 4]:
                 self.End_Game()
                 self.print_slow("Starting . . .")
-                
 
-            if self.health > 0 and self.health <= 100:
-                #si pones un input invalido imprime 'invalid input' pero si pones uno correcto te mueve pero 
-                # tambien te imprime el mensaje 'invalid input'
+            if 0 < self.health <= 100:
                 option = input("Type 'up', 'down', 'left', or 'right' to move ").lower()
+
                 if option in ['up', 'down', 'left', 'right']:
                     if option == 'up' and x > 0 and self.map[x - 1][y] != 1:
                         self.player_position = [x - 1, y]
@@ -777,7 +774,7 @@ class Videogame():
                         print("Hold up! There's tree")
                         continue  # Continuar pidiendo input si el movimiento no es válido
 
-                    #apples
+                    # apples
                     if self.player_position == [1, 0] or self.player_position == [3, 8] or self.player_position == [7, 3] or self.player_position == [9, 2] or self.player_position == [9, 7]:
                         print("""
                                     .................................................................
@@ -815,12 +812,12 @@ class Videogame():
 
         
                         """)
-                        print ("You have found an apple, they help you to restore your health by 5 points, you can save them for later, each takes one slot ")
+                        print("You have found an apple, they help you to restore your health by 5 points, you can save them for later, each takes one slot ")
                         print("")
-                        #falta: guardar o no en el inventario
+                        # falta: guardar o no en el inventario
 
-                    #screwdriver    
-                    if self.player_position == [2,1]:
+                    # screwdriver
+                    if self.player_position == [2, 1]:
                         print("""
                                                                                                  
                                                                  
@@ -858,10 +855,10 @@ class Videogame():
                         self.print_slow("      You have found a screwdriver, this tool is your key to unraveling mysteries, to unlock secrets. Its power lies ")
                         self.print_slow("      not in brute force,  but in finesse and precision.")
                         print("")
-                        #falta: guardar o no en el inventario
-                
-                    #first easter egg (first part)
-                    if self.player_position == [1,8]:
+                        # falta: guardar o no en el inventario
+
+                    # first easter egg (first part)
+                    if self.player_position == [1, 8]:
                         print("""
                                     .%%..%%...%%%%...%%..%%...........%%%%....%%%%...%%..%%.
                                     ..%%%%...%%..%%..%%..%%..........%%..%%..%%..%%..%%%.%%.
@@ -900,18 +897,18 @@ class Videogame():
                         while True:
                             option = input().lower()
                             if option == 'space':
-                               self.player_position = [3,0]
-                               break
+                                self.player_position = [3, 0]
+                                break
                             if option == 'out':
-                               break
+                                break
                             else:
                                 print("Give it another thought\n")
                                 time.sleep(1)
-                                #falta: arregalr error: cuando se escribe out, muestra invalid input aunque realice correctamente la accion
-                                #falta: habilitar poder regresar a la casilla desde las que te telatransporto, regresar a [1,8]
+                                # falta: arregalr error: cuando se escribe out, muestra invalid input aunque realice correctamente la accion
+                                # falta: habilitar poder regresar a la casilla desde las que te telatransporto, regresar a [1,8]
 
-                    #first easter egg (second part)
-                    if self.player_position == [3,0]:
+                    # first easter egg (second part)
+                    if self.player_position == [3, 0]:
                         self.easter_egg1()
                         self.print_slow("      Oh there's something else I've got to tell you.")
                         self.print_slow("      Alexei Dimitrievski (The Keeper), once a brilliant scientist of the USSR, delved into mind control experiments")
@@ -924,11 +921,11 @@ class Videogame():
                         print("")
                         self.print_slow("      Driven by an insatiable hunger for intellect, The Keeper and the fused entity weave a dark tapestry of torment, trapping")
                         self.print_slow("      innocent minds within a labyrinth of nightmares, perpetuating their own survival at the cost of others' mental essence.")
-                        print("")    
-                        #una vez descubierto el easter egg, agregar la opcion de regresar a [1,8]
+                        print("")
+                        # una vez descubierto el easter egg, agregar la opcion de regresar a [1,8]
 
-                    #second easter egg
-                    if self.player_position == [9,9]:
+                    # second easter egg
+                    if self.player_position == [9, 9]:
                         print("")
                         self.print_slow("      Complete the three riddles to unlock the secret:")
                         self.print_slow("      First riddle:")
@@ -937,6 +934,7 @@ class Videogame():
                         self.print_slow("      woodland birds that hunt during the day and have high visual acuity. They are known for their sharp talons and beak.")
                         self.print_slow("      Guess the name of the town:")
                         print("")
+
                         while True:
                             option = input("Type your guess: ").lower()
                             if any(keyword in option for keyword in ['hawkins']):
@@ -962,7 +960,7 @@ class Videogame():
                                             if any(keyword in option for keyword in ['demogorgon']):
                                                 self.print_slow("      Congratulations! You have completed all riddles.")
                                                 self.easter_egg2()
-                                                #cuando cambie de casilla regrese a la cancion base
+                                                # cuando cambie de casilla regrese a la cancion base
                                                 break
                                             else:
                                                 print("Not the word we're looking for.\n")
@@ -972,15 +970,13 @@ class Videogame():
                                 break
                             else:
                                 print("Not the word we're looking for.\n")
-                    else:
-                        print("Invalid input. Please try again.")
-                    
-                    if self.player_position == [9,8] or self.player_position == [1,9]:
-                        file_path = r'C:\Users\lloyd\Downloads\Y2meta.app - Billie Eilish - everything i wanted (Official Instrumental) (128 kbps).mp3'
+
+                    if self.player_position == [9, 8] or self.player_position == [1, 9]:
+                        file_path = r'everything i wanted.mp3'
                         self.play_music(file_path)
 
-                    #broke down car   
-                    if self.player_position == [0,0]:
+                    # broke down car
+                    if self.player_position == [0, 0]:
                         print("""
                                     ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
                                     ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -1039,10 +1035,10 @@ class Videogame():
                                                                       .-=*#%%#+-::::                  
 
                         """)
-                        #falta: consumir o dejar el item
-                
-                    #Radio
-                    if self.player_position == [2,4]:
+                        # falta: consumir o dejar el item
+
+                    # Radio
+                    if self.player_position == [2, 4]:
                         print("""
                                                   .:.                                               
                                                .:---  .::.....                                      
@@ -1078,8 +1074,8 @@ class Videogame():
                         self.print_slow("      Oh no! The radio has run out of battery.")
                         print("")
 
-                    #Jacket
-                    if self.player_position == [5,2]:
+                    # Jacket
+                    if self.player_position == [5, 2]:
                         print("""                                                              
                                                                                                                                             
                                                         -+********=.                                   
@@ -1116,11 +1112,11 @@ class Videogame():
                         """)
                         self.print_slow("      You have found Tony’s jacket, a note is inside of a pocket, he opens it and something is written on it “western")
                         self.print_slow("      avenue” and a phone number the last digit is unreadable, the number is “628 826 129*.")
-                        #falta: guardar o no en el inventario
+                        # falta: guardar o no en el inventario
                         print("")
-                    
-                    #street signals
-                    if self.player_position == [5,5]:
+
+                    # street signals
+                    if self.player_position == [5, 5]:
                         print("""
                                     =============----==========-===-------==========-----============
                                     ---=**##+======-====----=================----====-========--==---
@@ -1169,8 +1165,8 @@ class Videogame():
                         self.print_slow("      embrace. To the right, 'No Way Out' challenges your resolve. Choose your destiny wisely”")
                         print("")
 
-                    #Mushroom
-                    if self.player_position == [7,7]:
+                    # Mushroom
+                    if self.player_position == [7, 7]:
                         print("""
 
                                                       :=+******#*+=:                  
@@ -1208,10 +1204,10 @@ class Videogame():
                         self.print_slow("      Its effects will transport you to impossible landscapes and immerse you in unparalleled visual ecstasy.")
                         self.print_slow("      But beware, intrepid seeker, for the line between reality and illusion fades.")
                         print("")
-                        #falta: consumir o dejar el item
+                        # falta: consumir o dejar el item
 
-                    #coins
-                    if self.player_position == [5,9]:
+                    # coins
+                    if self.player_position == [5, 9]:
                         print("""
                                                        :*#%%%%%@@@@@@@%+                   
                                                   *#%%%#++===========++#%%%@@-             
@@ -1243,19 +1239,19 @@ class Videogame():
                                                      +++##############*==+           
                                                      
                         """)
-                        
+
                         self.print_slow("      Coins, the glittering treasures strewn across these lands. These shimmering tokens of wealth and fortune")
                         self.print_slow("      are scattered far and wide, waiting to be claimed by the intrepid souls who dare to explore every nook and")
                         self.print_slow("      cranny of this vast forest.")
                         print("")
-                        #falta: guardar o no en el inventario
-        
-                    #Minigame
-                    if self.player_position == [8,5]:
+                        # falta: guardar o no en el inventario
+
+                    # Minigame
+                    if self.player_position == [8, 5]:
                         pass
 
-                    #phone booth
-                    if self.player_position == [8,0]:
+                    # phone booth
+                    if self.player_position == [8, 0]:
                         print("""
                                      .::::::::::::::::::::::::::::::::::::::::::::::::::::::::. 
                                     .=:======================================================:-:
@@ -1288,27 +1284,27 @@ class Videogame():
                                     .--++++++++++++++++++++++++++++++++++++++++++++++++++++++=.-
                                      --:::::::::::::::::::::::::::::::::::::::::::::::::::::::- 
                         """)
-                        #implemntar la verificacion del desarmador
-                        #implemntar la verificacion de la chamarra
-                        #implemntar la verificacion del dinero
-                        #implemntar adivianr el ultimo numero (8 va a ser el numero)
-                        #una vez compltadas esas acciones agregar una parte de historia en texto
-                        #cuando se acabe de mostrar el texto te llevara a la batalla final en [9,4]
+                        # implemntar la verificacion del desarmador
+                        # implemntar la verificacion de la chamarra
+                        # implemntar la verificacion del dinero
+                        # implemntar adivianr el ultimo numero (8 va a ser el numero)
+                        # una vez compltadas esas acciones agregar una parte de historia en texto
+                        # cuando se acabe de mostrar el texto te llevara a la batalla final en [9,4]
                         # 
-                        self.print_slow("Type your guess or type 'Out' to not take the quest: ")#esto solo es una prueba
+                        self.print_slow("Type your guess or type 'Out' to not take the quest: ") # esto solo es una prueba
                         while True:
                             option = input().lower()
                             if option == 'space':
-                               self.player_position = [9,4]
-                               break
+                                self.player_position = [9, 4]
+                                break
                             if option == 'out':
-                               break
+                                break
                             else:
                                 print("Give it another thought\n")
                                 time.sleep(1)
 
-                    #back pack
-                    if self.player_position == [5,9]:
+                    # backpack
+                    if self.player_position == [5, 9]:
                         print("""
  
                                                      .=++++++++++-             
@@ -1339,15 +1335,16 @@ class Videogame():
                         self.print_slow("      durable materials and enchanted with the magic of storage, it is more than mere fabric and straps, use it ")
                         self.print_slow("      with wisdom, not everything can be stored inside of it. Your inventory has increased to 3 slots")
                         print("")
-                    #ampliar el inventario a 3 items
+                    # ampliar el inventario a 3 items
 
                     print("Actual position:", self.player_position)
                     print("")
                 else:
                     print("Invalid input. Please try again.")
             else:
-                self.Game_Over() 
+                self.Game_Over()
                 exit(0)
+
 
 vg = Videogame()
 vg.Title()

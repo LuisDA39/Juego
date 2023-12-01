@@ -8,7 +8,8 @@ class Videogame:
         self.health = 100  # limitar la vida, no puede llegar a mas de 100 pts
         self.inventory = []  # crear el inventario
         self.max_cap = 1
-        self.player_position = [0, 3]
+        self.current_space = 0
+        self.player_position = [0, 0]
         self.map = [
             [0, 0, 0, 0, 0, 1, 0, 0, 1, 0],
             [0, 1, 0, 0, 1, 1, 0, 1, 0, 0],
@@ -812,9 +813,26 @@ class Videogame:
 
         
                         """)
-                        print("You have found an apple, they help you to restore your health by 5 points, you can save them for later, each takes one slot ")
-                        print("")
-                        # falta: guardar o no en el inventario
+                        print("You've come across an apple. It restores 5 health points. Would you like to enjoy it now or come back for it later?")
+
+                        while True:
+                            if self.health < 100:
+                                option = input().lower()
+                                if option in ['yes', 'eat', 'enjoy', 'no', 'later']:
+                                    if option in ['yes', 'eat', 'enjoy']:
+                                        print("Delicious! You ate an apple, and your health increased by 5 points.")
+                                        self.health += 5
+                                        if self.health > 100:
+                                            self.health = 100
+                                        break
+                                    if option in ['no', 'later']:
+                                        print("Alright, maybe later.")
+                                        break
+                                else:
+                                    print("I cant do that right now.")
+                            else:
+                                print("Seems like you don't need to restore health right now. You're all good! Feel free to come back later if needed.")
+                                break
 
                     # screwdriver
                     if self.player_position == [2, 1]:
@@ -904,7 +922,6 @@ class Videogame:
                             else:
                                 print("Give it another thought\n")
                                 time.sleep(1)
-                                # falta: arregalr error: cuando se escribe out, muestra invalid input aunque realice correctamente la accion
                                 # falta: habilitar poder regresar a la casilla desde las que te telatransporto, regresar a [1,8]
 
                     # first easter egg (second part)

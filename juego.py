@@ -1,4 +1,5 @@
 import os
+import random
 import time
 import pygame
 
@@ -9,7 +10,7 @@ class Videogame:
         self.inventory = []  # crear el inventario
         self.max_cap = 1
         self.current_space = 0
-        self.player_position = [2, 5]
+        self.player_position = [8, 5]
         self.map = [
             [0, 0, 0, 0, 0, 1, 0, 0, 1, 0],
             [0, 1, 0, 0, 1, 1, 0, 1, 0, 0],
@@ -957,7 +958,7 @@ class Videogame:
                         self.easter_egg1()
                         self.print_slow("      Oh there's something else I've got to tell you.")
                         self.print_slow("      Alexei Dimitrievski (The Keeper), once a brilliant scientist of the USSR, delved into mind control experiments")
-                        self.print_slow("      gone awry. His ambitious pursuit led to a catastrophic mishap when a machine designed to manipulate minds backfired.")
+                        self.print_slow("      gone away. His ambitious pursuit led to a catastrophic mishap when a machine designed to manipulate minds backfired.")
                         self.print_slow("      A being from a distant world seized the opportunity, intertwining its essence with The Keeper's consciousness.")
                         print("")
                         self.print_slow("      This entity, reliant on feeding off others' thoughts to sustain its existence, spurred The Keeper to abduct unsuspecting")
@@ -1388,7 +1389,55 @@ class Videogame:
 
                     # Minigame
                     if self.player_position == [8, 5] and self.player_position not in self.visited:
-                        pass
+                        self.visited.append(self.player_position) # Maybe aqui un ascii del lobo
+                        self.print_slow("      Navigating through the forest, the tranquility shatters as a distant growl reveals a lurking wolf.")
+                        self.print_slow("      Adrenaline surges, and you sprint through the trees. Amidst the chaos, you stumble upon a suitcase.")
+                        self.print_slow("      Flipping it open, relief washes over as you spot a firearm. However, it's locked with a combination.")
+                        self.print_slow("      With the wolf's howls closing in, your focus intensifies on deciphering the code—a crucial barrier between you and survival.")
+                        print("")
+
+                        self.print_slow("Swiftly now, decipher the 4-digit code—the wolf draws near. Your survival depends on a quick mind and a steady hand.\n")
+
+                        secret_code = str(random.randint(1000, 9999))  # Genera un número aleatorio de 4 dígitos
+                        attempts = 0
+                        index = 0
+
+                        while attempts < 10:
+                            digit_guess = input(f"Guess the {index + 1}º digit of the secret code: ")
+                            if len(digit_guess) != 1 or not digit_guess.isdigit():
+                                print("No time to waste! Enter a valid 5-digit number quickly.")
+                                continue
+                            if digit_guess == secret_code[index]:
+                                print("Correct!\n")
+                                index += 1
+                                if index == 4:
+                                    print(f"Congratulations! You unlocked the suitcase in {attempts} attempts")
+                                    break
+                            else:
+                                if digit_guess < secret_code[index]:
+                                    print("The digit is greater. Keep going!")
+                                else:
+                                    print("The digit is smaller. Keep trying!")
+                                attempts += 1
+
+                                if attempts == 3:
+                                    print("\nOh no! The wolf is getting closer.")
+                                elif attempts == 5:
+                                    print("\nThe wolf is almost upon you. Quick, decipher the code!")
+                                elif attempts == 7:
+                                    print("\nThe wolf is closing in. Hurry, decipher the code!")
+                                elif attempts == 10:
+                                    print("\nThe wolf attacks! You were too slow.")
+
+                                print(f"You have {10 - attempts} attempts left.\n")
+
+                        if attempts == 10:
+                            self.print_slow("      Despite your efforts, the wolf catches up.")
+                            self.print_slow("      You manage to escape, but the wolf leaves you severely injured.")
+                            self.print_slow("      Unfortunately, you've lost 50 health points in the encounter.")
+                            self.health -= 10
+                        else:
+                            self.print_slow("      You quickly grab the weapon, fend off the wolf, and escape unscathed. Well done!")
 
                     # phone booth
                     if self.player_position == [8, 0]:

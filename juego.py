@@ -9,7 +9,7 @@ class Videogame:
         self.inventory = []  # crear el inventario
         self.max_cap = 1
         self.current_space = 0
-        self.player_position = [0, 0]
+        self.player_position = [7, 7]
         self.map = [
             [0, 0, 0, 0, 0, 1, 0, 0, 1, 0],
             [0, 1, 0, 0, 1, 1, 0, 1, 0, 0],
@@ -813,25 +813,25 @@ class Videogame:
 
         
                         """)
-                        print("You've come across an apple. It restores 5 health points. Would you like to enjoy it now or come back for it later?")
+                        self.print_slow("You've come across an apple. It restores 5 health points. Would you like to enjoy it now or come back for it later?")
 
                         while True:
                             if self.health < 100:
-                                option = input().lower()
+                                option = input('>').lower()
                                 if option in ['yes', 'eat', 'enjoy', 'no', 'later']:
                                     if option in ['yes', 'eat', 'enjoy']:
-                                        print("Delicious! You ate an apple, and your health increased by 5 points.")
+                                        self.print_slow("Delicious! You ate an apple, and your health increased by 5 points.")
                                         self.health += 5
                                         if self.health > 100:
                                             self.health = 100
                                         break
                                     if option in ['no', 'later']:
-                                        print("Alright, maybe later.")
+                                        self.print_slow("Alright, maybe later.")
                                         break
                                 else:
-                                    print("I cant do that right now.")
+                                    self.print_slow("You cant do that right now.")
                             else:
-                                print("Seems like you don't need to restore health right now. You're all good! Feel free to come back later if needed.")
+                                self.print_slow("Seems like you don't need to restore health right now. You're all good! Feel free to come back later if needed.")
                                 break
 
                     # screwdriver
@@ -873,7 +873,29 @@ class Videogame:
                         self.print_slow("      You have found a screwdriver, this tool is your key to unraveling mysteries, to unlock secrets. Its power lies ")
                         self.print_slow("      not in brute force,  but in finesse and precision.")
                         print("")
-                        # falta: guardar o no en el inventario
+
+                        self.print_slow("Would you like to take the screwdriver with you?: ")
+                        while True:
+                            option = input('>').lower()
+
+                            if option in ['yes', 'no', 'take', 'leave']:
+                                if option in ['yes', 'take']:
+                                    if self.max_cap == self.current_space:
+                                        self.print_slow("Sorry, you're already carrying too many things. You can't carry more items.")
+                                        if self.max_cap == 1:
+                                            self.print_slow("There must be a way to store more items.")
+                                        break
+                                    else:
+                                        self.print_slow("You picked up the screwdriver. Maybe it will come in handy...")
+                                        self.inventory.append('screwdriver')
+                                        self.current_space += 1
+                                        break
+
+                                if option in ['no', 'leave']:
+                                    self.print_slow("Alright, maybe later.")
+                                    break
+                            else:
+                                self.print_slow("You cant do that right now.")
 
                     # first easter egg (first part)
                     if self.player_position == [1, 8]:
@@ -1052,7 +1074,26 @@ class Videogame:
                                                                       .-=*#%%#+-::::                  
 
                         """)
-                        # falta: consumir o dejar el item
+
+                        self.print_slow("Would you like to try a cookie?")
+                        while True:
+                            if self.health < 100:
+                                option = input('>').lower()
+                                if option in ['yes', 'eat', 'enjoy', 'no', 'later', 'cookie', 'try']:
+                                    if option in ['yes', 'eat', 'enjoy', 'cookie', 'try']:
+                                        self.print_slow("Delicious! You ate a cookie, and your health increased by 10 points.")
+                                        self.health += 10
+                                        if self.health > 100:
+                                            self.health = 100
+                                        break
+                                    if option in ['no', 'later']:
+                                        self.print_slow("Alright, maybe later.")
+                                        break
+                                else:
+                                    self.print_slow("You cant do that right now.")
+                            else:
+                                self.print_slow("Seems like you don't need to restore health right now. You're all good! Feel free to come back later if needed.")
+                                break
 
                     # Radio
                     if self.player_position == [2, 4]:
@@ -1129,7 +1170,29 @@ class Videogame:
                         """)
                         self.print_slow("      You have found Tony’s jacket, a note is inside of a pocket, he opens it and something is written on it “western")
                         self.print_slow("      avenue” and a phone number the last digit is unreadable, the number is “628 826 129*.")
-                        # falta: guardar o no en el inventario
+
+                        self.print_slow("Would you like to take the Jacket with you?: ")
+                        while True:
+                            option = input('>').lower()
+
+                            if option in ['yes', 'no', 'take', 'leave']:
+                                if option in ['yes', 'take']:
+                                    if self.max_cap == self.current_space:
+                                        self.print_slow("Sorry, you're already carrying too many things. You can't carry more items.")
+                                        if self.max_cap == 1:
+                                            self.print_slow("There must be a way to store more items.")
+                                        break
+                                    else:
+                                        self.print_slow("You picked up the Jacket. Maybe it will come in handy...")
+                                        self.inventory.append('jacket')
+                                        self.current_space += 1
+                                        break
+
+                                if option in ['no', 'leave']:
+                                    self.print_slow("Alright, maybe later.")
+                                    break
+                            else:
+                                self.print_slow("You cant do that right now.")
                         print("")
 
                     # street signals
@@ -1221,7 +1284,25 @@ class Videogame:
                         self.print_slow("      Its effects will transport you to impossible landscapes and immerse you in unparalleled visual ecstasy.")
                         self.print_slow("      But beware, intrepid seeker, for the line between reality and illusion fades.")
                         print("")
-                        # falta: consumir o dejar el item
+
+                        self.print_slow("Would you like to try the mushroom?")
+                        while True:
+                            option = input('>').lower()
+                            if option in ['yes', 'eat', 'enjoy', 'no', 'later', 'mushroom', 'try']:
+                                if option in ['yes', 'eat', 'enjoy', 'mushroom', 'try']:
+                                    self.print_slow("That")
+                                    time.sleep(0.7)
+                                    self.print_slow("Wasnt")
+                                    time.sleep(0.7)
+                                    self.print_slow("A good idea")
+                                    time.sleep(0.7)
+                                    self.print_slow("Your health has decreased by 10 points. Maybe you shouldn't eat strange things from the forest...")
+                                    break
+                                if option in ['no', 'later']:
+                                    self.print_slow("Alright, maybe later.")
+                                    break
+                            else:
+                                self.print_slow("You cant do that right now.")
 
                     # coins
                     if self.player_position == [5, 9]:
@@ -1261,7 +1342,30 @@ class Videogame:
                         self.print_slow("      are scattered far and wide, waiting to be claimed by the intrepid souls who dare to explore every nook and")
                         self.print_slow("      cranny of this vast forest.")
                         print("")
-                        # falta: guardar o no en el inventario
+
+                        self.print_slow("Would you like to take the coins with you?: ")
+                        while True:
+                            option = input('>').lower()
+
+                            if option in ['yes', 'no', 'take', 'leave']:
+                                if option in ['yes', 'take']:
+                                    if self.max_cap == self.current_space:
+                                        self.print_slow("Sorry, you're already carrying too many things. You can't carry more items.")
+                                        if self.max_cap == 1:
+                                            self.print_slow("There must be a way to store more items.")
+                                        break
+                                    else:
+                                        self.print_slow("You picked up the coins. They might come in handy later.")
+                                        self.inventory.append('coins')
+                                        self.current_space += 1
+                                        break
+
+                                if option in ['no', 'leave']:
+                                    self.print_slow("Alright, maybe later.")
+                                    break
+                            else:
+                                self.print_slow("You cant do that right now.")
+                        print("")
 
                     # Minigame
                     if self.player_position == [8, 5]:
@@ -1352,7 +1456,7 @@ class Videogame:
                         self.print_slow("      durable materials and enchanted with the magic of storage, it is more than mere fabric and straps, use it ")
                         self.print_slow("      with wisdom, not everything can be stored inside of it. Your inventory has increased to 3 slots")
                         print("")
-                    # ampliar el inventario a 3 items
+                        self.max_cap = 3
 
                     print("Actual position:", self.player_position)
                     print("")

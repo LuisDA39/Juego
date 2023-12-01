@@ -5,11 +5,11 @@ import pygame
 
 class Videogame:
     def __init__(self):
-        self.health = 100  # limitar la vida, no puede llegar a mas de 100 pts
+        self.health = 1 # limitar la vida, no puede llegar a mas de 100 pts
         self.inventory = []  # crear el inventario
         self.max_cap = 1
         self.current_space = 0
-        self.player_position = [7, 7]
+        self.player_position = [2, 5]
         self.map = [
             [0, 0, 0, 0, 0, 1, 0, 0, 1, 0],
             [0, 1, 0, 0, 1, 1, 0, 1, 0, 0],
@@ -22,6 +22,8 @@ class Videogame:
             [0, 0, 0, 1, 1, 0, 0, 1, 1, 1],
             [1, 0, 0, 1, 0, 1, 0, 0, 0, 0]
         ]
+        self.visited = []
+        self.car_first_visit = True
 
     def play_music(self, file_path):
         pygame.init()
@@ -561,7 +563,7 @@ class Videogame:
                                     ╚═════╝ ╚═╝  ╚═╝   ╚═╝      ╚═╝   ╚══════╝╚══════╝
         """)
 
-    #crear historia y minijuego final
+    # crear historia y minijuego final
 
     def Game_Over(self):
         print("""
@@ -776,7 +778,8 @@ class Videogame:
                         continue  # Continuar pidiendo input si el movimiento no es válido
 
                     # apples
-                    if self.player_position == [1, 0] or self.player_position == [3, 8] or self.player_position == [7, 3] or self.player_position == [9, 2] or self.player_position == [9, 7]:
+                    apple_positions = [[1, 0], [3, 8], [7, 3], [9, 2], [9, 7]]
+                    if any(pos == self.player_position for pos in apple_positions) and self.player_position not in self.visited:
                         print("""
                                     .................................................................
                                     ........................................*+=......................
@@ -822,6 +825,7 @@ class Videogame:
                                     if option in ['yes', 'eat', 'enjoy']:
                                         self.print_slow("Delicious! You ate an apple, and your health increased by 5 points.")
                                         self.health += 5
+                                        self.visited.append(self.player_position)
                                         if self.health > 100:
                                             self.health = 100
                                         break
@@ -835,7 +839,7 @@ class Videogame:
                                 break
 
                     # screwdriver
-                    if self.player_position == [2, 1]:
+                    if self.player_position == [2, 1] and self.player_position not in self.visited:
                         print("""
                                                                                                  
                                                                  
@@ -888,6 +892,7 @@ class Videogame:
                                     else:
                                         self.print_slow("You picked up the screwdriver. Maybe it will come in handy...")
                                         self.inventory.append('screwdriver')
+                                        self.visited.append(self.player_position)
                                         self.current_space += 1
                                         break
 
@@ -898,7 +903,7 @@ class Videogame:
                                 self.print_slow("You cant do that right now.")
 
                     # first easter egg (first part)
-                    if self.player_position == [1, 8]:
+                    if self.player_position == [1, 8] and self.player_position not in self.visited:
                         print("""
                                     .%%..%%...%%%%...%%..%%...........%%%%....%%%%...%%..%%.
                                     ..%%%%...%%..%%..%%..%%..........%%..%%..%%..%%..%%%.%%.
@@ -937,6 +942,7 @@ class Videogame:
                         while True:
                             option = input().lower()
                             if option == 'space':
+                                self.visited.append(self.player_position)
                                 self.player_position = [3, 0]
                                 break
                             if option == 'out':
@@ -963,7 +969,7 @@ class Videogame:
                         print("")
                         # una vez descubierto el easter egg, agregar la opcion de regresar a [1,8]
 
-                    # second easter egg
+                    # second easter egg: agregar validacion de visita
                     if self.player_position == [9, 9]:
                         print("")
                         self.print_slow("      Complete the three riddles to unlock the secret:")
@@ -1015,8 +1021,9 @@ class Videogame:
                         self.play_music(file_path)
 
                     # broke down car
-                    if self.player_position == [0, 0]:
-                        print("""
+                    if self.player_position == [0, 0] and self.player_position not in self.visited:
+                        if self.car_first_visit:
+                            print("""
                                     ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
                                     ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
                                     ::::::::::::::::::::::::::::::::::::::::==+**###%%%##***++==--::::::::::::::::::::::::::.:
@@ -1041,11 +1048,11 @@ class Videogame:
                                     ::::::::::---------=-==-=============================----------:::::::---:---------:------
                                     :::::::::::::::-::-:--------------------===-====-=----------------------:-----------------                    
                         """)
-                        self.print_slow("      Looks like you have found a Mercedes-Benz 190 SL from the 50s in a perfectly awful shape, it can’t even")
-                        self.print_slow("      be ridden. ")
-                        print("")
-                        self.print_slow("      WOW! There’s a pack of cookies inside of the car, you can use them to gain +10 of health ")
-                        print("""
+                            self.print_slow("      Looks like you have found a Mercedes-Benz 190 SL from the 50s in a perfectly awful shape, it can’t even")
+                            self.print_slow("      be ridden. ")
+                            print("")
+                            self.print_slow("      WOW! There’s a pack of cookies inside of the car, you can use them to gain +10 of health ")
+                            print("""
 
                                                                    .::::-=+#%%%%%-                    
                                                                 =#%@%%%%#**+===+@@                    
@@ -1074,6 +1081,11 @@ class Videogame:
                                                                       .-=*#%%#+-::::                  
 
                         """)
+                            self.car_first_visit = False
+                        else:
+                            self.print_slow("Ah, that car again. It seems like it's not the first time you've come across it.")
+                            self.print_slow("Oh, there are the cookies.")
+                            print("")
 
                         self.print_slow("Would you like to try a cookie?")
                         while True:
@@ -1083,6 +1095,7 @@ class Videogame:
                                     if option in ['yes', 'eat', 'enjoy', 'cookie', 'try']:
                                         self.print_slow("Delicious! You ate a cookie, and your health increased by 10 points.")
                                         self.health += 10
+                                        self.visited.append(self.player_position)
                                         if self.health > 100:
                                             self.health = 100
                                         break
@@ -1096,7 +1109,7 @@ class Videogame:
                                 break
 
                     # Radio
-                    if self.player_position == [2, 4]:
+                    if self.player_position == [2, 4] and self.player_position not in self.visited:
                         print("""
                                                   .:.                                               
                                                .:---  .::.....                                      
@@ -1131,9 +1144,10 @@ class Videogame:
                         self.print_slow("      over 2 days; he responds to the name of Tony Byers…' – “. ")
                         self.print_slow("      Oh no! The radio has run out of battery.")
                         print("")
+                        self.visited.append(self.player_position)
 
                     # Jacket
-                    if self.player_position == [5, 2]:
+                    if self.player_position == [5, 2] and self.player_position not in self.visited:
                         print("""                                                              
                                                                                                                                             
                                                         -+********=.                                   
@@ -1185,6 +1199,7 @@ class Videogame:
                                     else:
                                         self.print_slow("You picked up the Jacket. Maybe it will come in handy...")
                                         self.inventory.append('jacket')
+                                        self.visited.append(self.player_position)
                                         self.current_space += 1
                                         break
 
@@ -1196,7 +1211,7 @@ class Videogame:
                         print("")
 
                     # street signals
-                    if self.player_position == [5, 5]:
+                    if self.player_position == [5, 5] and self.player_position not in self.visited:
                         print("""
                                     =============----==========-===-------==========-----============
                                     ---=**##+======-====----=================----====-========--==---
@@ -1244,9 +1259,10 @@ class Videogame:
                         self.print_slow("      Two paths lie before you. To the left, the 'Soulless Forest' hides secrets within its eerie ")
                         self.print_slow("      embrace. To the right, 'No Way Out' challenges your resolve. Choose your destiny wisely”")
                         print("")
+                        self.visited.append(self.player_position)
 
                     # Mushroom
-                    if self.player_position == [7, 7]:
+                    if self.player_position == [7, 7] and self.player_position not in self.visited:
                         print("""
 
                                                       :=+******#*+=:                  
@@ -1297,6 +1313,8 @@ class Videogame:
                                     self.print_slow("A good idea")
                                     time.sleep(0.7)
                                     self.print_slow("Your health has decreased by 10 points. Maybe you shouldn't eat strange things from the forest...")
+                                    self.health -= 10
+                                    self.visited.append(self.player_position)
                                     break
                                 if option in ['no', 'later']:
                                     self.print_slow("Alright, maybe later.")
@@ -1305,7 +1323,7 @@ class Videogame:
                                 self.print_slow("You cant do that right now.")
 
                     # coins
-                    if self.player_position == [5, 9]:
+                    if self.player_position == [5, 9] and self.player_position not in self.visited:
                         print("""
                                                        :*#%%%%%@@@@@@@%+                   
                                                   *#%%%#++===========++#%%%@@-             
@@ -1358,6 +1376,7 @@ class Videogame:
                                         self.print_slow("You picked up the coins. They might come in handy later.")
                                         self.inventory.append('coins')
                                         self.current_space += 1
+                                        self.visited.append(self.player_position)
                                         break
 
                                 if option in ['no', 'leave']:
@@ -1368,7 +1387,7 @@ class Videogame:
                         print("")
 
                     # Minigame
-                    if self.player_position == [8, 5]:
+                    if self.player_position == [8, 5] and self.player_position not in self.visited:
                         pass
 
                     # phone booth
@@ -1425,7 +1444,7 @@ class Videogame:
                                 time.sleep(1)
 
                     # backpack
-                    if self.player_position == [5, 9]:
+                    if self.player_position == [5, 9] and self.player_position not in self.visited:
                         print("""
  
                                                      .=++++++++++-             
@@ -1456,6 +1475,7 @@ class Videogame:
                         self.print_slow("      durable materials and enchanted with the magic of storage, it is more than mere fabric and straps, use it ")
                         self.print_slow("      with wisdom, not everything can be stored inside of it. Your inventory has increased to 3 slots")
                         print("")
+                        self.visited.append(self.player_position)
                         self.max_cap = 3
 
                     print("Actual position:", self.player_position)

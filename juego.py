@@ -758,6 +758,8 @@ class Videogame:
                 phase = 3
 
     def Win(self):
+        file_path = r'soundfx/evidemment.mp3'
+        self.play_music(file_path)
         print("""
 
                     ▄██   ▄    ▄██████▄  ███    █▄        ▄█     █▄   ▄█  ███▄▄▄▄     ▄█ 

@@ -11,7 +11,7 @@ class Videogame:
         self.inventory = []  # crear el inventario
         self.max_cap = 1
         self.current_space = 0
-        self.player_position = [0, 3]
+        self.player_position = [1,6]
         self.map = [
             [0, 0, 0, 0, 0, 1, 0, 0, 1, 0],
             [0, 1, 0, 0, 1, 1, 0, 1, 0, 0],
@@ -74,6 +74,7 @@ class Videogame:
         print("")
         self.print_slow("      Tony attempts to sever the rope, but a misjudged move results in a perilous gash across his hand, blood trickling as ")
         self.print_slow("      he collapses from the injury. Health depletes by 25 points... ")
+        print("    Current Health: ", self.health)
         self.print_slow("      Unfortunately, The Keeper caught wind of his attempts to break free. Swiftly, the rope was replaced with unyielding")
         self.print_slow("      plastic straps, binding Tony to the chair before The Keeper departed.")
         self.health -= 25
@@ -255,7 +256,9 @@ class Videogame:
         self.print_slow("      Tony drifted into an uneasy slumber, yet this time, his dreams took a terrifying turn. A malevolent ")
         self.print_slow("      creature invaded his subconscious, unleashing a harrowing nightmare. Relentlessly pursued, he was finally  ")
         self.print_slow("      ensnared, the creature threatening to devour his very soul. It provoked him an intense fever within the ")
-        self.print_slow("      dream jolted him awake, but not before his health plummeted by 50 points. A critical choice is up ahead:")
+        self.print_slow("      dream jolted him awake, but not before his health plummeted by 50 points. ")
+        print(     "Current Health: ", self.health)
+        self.print_slow(       "A critical choice is up ahead:")
         self.health -= 50
         print("                Continue trying to escape  [Continue]")
         print("                Give up [Give up]")
@@ -535,6 +538,9 @@ class Videogame:
                    --=*====--=+++##:    +*******+===-::::::---=====++++++===------+++*++++++++*++++:+##%%%%%%%#%%%%%#     
                   .=-++=======++*#=     =*******+==--::::::::-----=========---:::-+**++=========++*. -##%@%%%%%%%%%%#+: 
         """)
+        self.print_slow("      Your health has increases by 8 points")
+        print("    Current Health: ", self.health)
+        print("")
 
     def End_Game(self):
         file_path = r'soundfx/lavender.mp3'
@@ -745,7 +751,8 @@ class Videogame:
             if player_health <= 0:
                 print("\nYou lost.")
                 player_health = 0
-                break
+                self.Game_Over()
+                exit(0)
 
             if boss_health <= 0:
                 print("\nYou won!")
@@ -806,7 +813,7 @@ class Videogame:
         
                      
         """)
-        time.sleep(28)
+        time.sleep(29)
 
     def Title(self):
         file_path = r'soundfx/everything i wanted.mp3'
@@ -1042,6 +1049,7 @@ class Videogame:
                                     if option in ['yes', 'eat', 'enjoy', 'now']:
                                         self.print_slow("      Delicious! You ate an apple, and your health increased by 7 points.")
                                         self.health += 7
+                                        print("    Current Health: ", self.health)
                                         self.visited.append(self.player_position)
                                         if self.health > 100:
                                             self.health = 100
@@ -1052,6 +1060,7 @@ class Videogame:
                                 else:
                                     self.print_slow("      You cant do that right now.")
                             else:
+                                print("    Current Health: ", self.health)
                                 self.print_slow("      Seems like you don't need to restore health right now. You're all good! Feel free to come back later if needed.")
                                 break
 
@@ -1323,6 +1332,7 @@ class Videogame:
                                         if option in ['yes', 'eat', 'enjoy', 'cookie', 'try']:
                                             self.print_slow("Delicious! You ate a cookie, and your health increased by 10 points.")
                                             self.health += 10
+                                            print("    Current Health: ", self.health)
                                             self.visited.append(self.player_position)
                                             if self.health > 100:
                                                 self.health = 100
@@ -1333,6 +1343,7 @@ class Videogame:
                                     else:
                                         self.print_slow("You cant do that right now.")
                                 else:
+                                    print("    Current Health: ", self.health)
                                     self.print_slow("Seems like you don't need to restore health right now. You're all good! Feel free to come back later if needed.")
                                     break
 
@@ -1543,6 +1554,7 @@ class Videogame:
                                     time.sleep(0.7)
                                     self.print_slow("Your health has decreased by 10 points. Maybe you shouldn't eat strange things from the forest...")
                                     self.health -= 10
+                                    print("    Current Health: ", self.health)
                                     self.visited.append(self.player_position)
                                     break
                                 if option in ['no', 'later']:
@@ -1747,7 +1759,8 @@ class Videogame:
                                      --:::::::::::::::::::::::::::::::::::::::::::::::::::::::- 
 
                         """)
-                        self.print_slow("      A telephone booth is right in front of you, isn't that weird?... ANYWAYS, do you want to use it?")
+                        self.print_slow("      A telephone booth is right in front of you, isn't that weird?... ANYWAYS")
+                        self.print_slow("      Dang it! The phone is wrecked, Do you want to repair it?")
                         op = input("       Type 'yes' or 'no' ").lower().strip()
 
                         while True:
@@ -1762,7 +1775,7 @@ class Videogame:
                                             if op in ['yes', 'no']:
                                                 if op == 'yes':
                                                     print("")
-                                                    self.print_slow("      Dang it! The phone is wrecked, Do you want to repair it?")
+                                                    self.print_slow("      Would like to use some doubloons and try to dial?")
                                                     
                                                     op = input("Type 'yes' or 'no' ").lower().strip()
                                                     while True:
@@ -1803,6 +1816,7 @@ class Videogame:
 
                                                                                         if max_attempts == attempts:
                                                                                             self.Game_Over()
+                                                                                            exit(0)
                                                                                             break
 
                                                                                 else:

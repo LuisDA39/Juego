@@ -1528,23 +1528,102 @@ class Videogame:
                                     .--++++++++++++++++++++++++++++++++++++++++++++++++++++++=.-
                                      --:::::::::::::::::::::::::::::::::::::::::::::::::::::::- 
                         """)
+                        self.print_slow("A telephone booth is right in front of you, isn't that weird?... ANYWAYS, do you want to use it?")
+                        op = input("Type 'yes' or 'no' ").lower().strip()
 
-                        if all(item in self.inventory for item in ['screwdriver', 'jacket', 'coins']):
-                            self.print_slow("oh me falta un numero")
+                        #CORREGIR
+                        while True:
+                            if op in ['yes', 'no']:
+                                if op == 'yes':
+                                    self.print_slow("Dang it! The phone is wrecked, Do you want to repair it?")
+                                    op = input("Type 'yes' or 'no' ").lower().strip()
 
-                            secret_number = 8
-                            attempts = 0
+                                    while True:
+                                        if op in ['yes', 'no']:
+                                            if op == 'yes':
+                                                if 'screwdriver' in self.inventory:
+                                                    self.print_slow("Phone booth repaired!")
+                                                    self.print_slow("Do you want to use it now?")
+                            
+                                                    op = input("Type 'yes' or 'no' ").lower().strip()
+                            
+                                                    while True:
+                                                        if op in ['yes', 'no']:
+                                                            if op == 'yes':
+                                                                self.print_slow("Seems like you need some doubloons to use it, do you want to spend some?")
 
-                            while True:
-                                user_guess = input("Enter your guess: ")
+                                                                op = input("Type 'yes' or 'no' ").lower().strip()
 
-                                attempts += 1
+                                                                while True:
+                                                                    if op in ['yes', 'no']:
+                                                                        if op == 'yes':
+                                                                            if 'coins' in self.inventory:
+                                                                                self.print_slow("Coins inserted!")
+                                                                                self.print_slow("Would you like to make a call?")
 
-                                if int(user_guess) == secret_number:
-                                    print(f"Congratulations! You guessed the number in {attempts} attempts.")
+                                                                                op = input("Type 'yes' or 'no' ").lower().strip()
+
+                                                                                while True:
+                                                                                    if op in ['yes', 'no']:
+                                                                                        if op == 'yes':
+                                                                                            if 'jacket' in self.inventory:
+                                                                                                self.print_slow("Awsome! make your call")
+                                                                                                self.print_slow("A digit is missing, guess it")
+
+                                                                                                secret_number = 8
+                                                                                                attempts = 0
+
+                                                                                                while True:
+                                                                                                    user_guess = input("Enter your guess: ")
+
+                                                                                                    attempts += 1
+
+                                                                                                    if int(user_guess) == secret_number:
+                                                                                                        print(f"Congratulations! You guessed the number in {attempts} attempts.")
+                                                                                                        self.End_Game()
+                                                                                                    else:
+                                                                                                        print("Incorrect. Try again.")
+                                                                                                        user_guess = input("Enter your guess: ")
+                                                                                                break  # Added to exit the loop
+                                                                                            else:
+                                                                                                self.print_slow("Go find a phone number")
+                                                                                                break  # Added to exit the loop
+                                                                                    elif op == 'no':
+                                                                                        print("Good luck!")
+                                                                                        break
+                                                                                    else:
+                                                                                        print("That's not a valid option")
+                                                                                        break  # Added to exit the loop
+                                                                                break  # Added to exit the loop
+                                                                        elif op == 'no':
+                                                                            self.print_slow("Oh!.. Okay")
+                                                                            break
+                                                                    else:
+                                                                        print("That's not a valid option")
+                                                                        op = input("Type 'yes' or 'no' ").lower().strip()
+                                                            elif op == 'no':
+                                                                self.print_slow("You're such a stingy fella")
+                                                                break
+                                                        else:
+                                                            print("That's not a valid option")
+                                                            op = input("Type 'yes' or 'no' ").lower().strip()
+                                                else:    
+                                                    self.print_slow("Looks like you don't have anything to repair it")
+                                                    break
+                                            elif op == 'no':
+                                                self.print_slow("Oh such a shame!")
+                                                break
+                                        else:
+                                            print("That's not a valid option")
+                                            op = input("Type 'yes' or 'no' ").lower().strip()
+                                elif op == 'no':
+                                    # Your code for 'no' option goes here
                                     break
-                                else:
-                                    print("Incorrect. Try again.")
+                            else:
+                                print("That's not a valid option")
+                                op = input("Type 'yes' or 'no' ").lower().strip()
+
+                        
 
 
                         # implemntar adivianr el ultimo numero (8 va a ser el numero)

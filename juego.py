@@ -37,7 +37,7 @@ class Videogame:
     def print_slow(self, text):
         for char in text:
             print(char, end='', flush=True)
-            time.sleep(0.0005)
+            time.sleep(0.05)
         print()
 
     def path_A(self):
@@ -181,7 +181,7 @@ class Videogame:
                     self.path_L()
                     break
             else:
-                print("Not the word we're looking for\n")
+                print("    Not the word we're looking for\n")
                 time.sleep(1)
 
     def path_G(self):
@@ -755,6 +755,25 @@ class Videogame:
 
             if boss_health < 250:
                 phase = 3
+
+    def Win():
+        print("""
+
+                    ▄██   ▄    ▄██████▄  ███    █▄        ▄█     █▄   ▄█  ███▄▄▄▄     ▄█ 
+                    ███   ██▄ ███    ███ ███    ███      ███     ███ ███  ███▀▀▀██▄  ███
+                    ███▄▄▄███ ███    ███ ███    ███      ███     ███ ███▌ ███   ███  ███
+                    ▀▀▀▀▀▀███ ███    ███ ███    ███      ███     ███ ███▌ ███   ███  ███
+                    ▄██   ███ ███    ███ ███    ███      ███     ███ ███▌ ███   ███  ███
+                    ███   ███ ███    ███ ███    ███      ███     ███ ███  ███   ███  ███
+                    ███   ███ ███    ███ ███    ███      ███ ▄█▄ ███ ███  ███   ███
+                     ▀█████▀   ▀██████▀  ████████▀        ▀███▀███▀  █▀    ▀█   █▀   █▀
+
+        """)
+        time.sleep(3)
+        self.print_slow(      "You have proved yourself you are a brave adventurer, a overworld beast couldn't handle your ")
+        self.print_slow(      "intelligence, strength and boldness. Your life is not as challenging as this game, however ")
+        self.print_slow(      "you should be able to understand that your actions have consecuences and they affect our lives")
+        self.print_slow(      "we suggest you to be as celver as you were in this game, in the real life")
 
     def Game_Over(self):
         file_path = r'soundfx/lovely.mp3'
@@ -1593,6 +1612,7 @@ class Videogame:
                         print("")
 
                     # Minigame
+                    #si ganas, cuando acabe la plea regresar a la cancion everything i wanted
                     if self.player_position == [8, 5] and self.player_position not in self.visited:
                         file_path = r'soundfx/lobo.mp3'
                         self.play_music(file_path)
@@ -1719,97 +1739,102 @@ class Videogame:
                                      --:::::::::::::::::::::::::::::::::::::::::::::::::::::::- 
 
                         """)
-                        self.print_slow("A telephone booth is right in front of you, isn't that weird?... ANYWAYS, do you want to use it?")
-                        op = input("Type 'yes' or 'no' ").lower().strip()
+                        self.print_slow("      A telephone booth is right in front of you, isn't that weird?... ANYWAYS, do you want to use it?")
+                        op = input("       Type 'yes' or 'no' ").lower().strip()
 
                         while True:
                             if op in ['yes', 'no']:
                                 if op == 'yes':
                                     if 'screwdriver' in self.inventory:
-                                        self.print_slow("Phone booth repaired!")
-                                        self.print_slow("Do you want to use it now?")
+                                        self.print_slow("      Phone booth repaired!")
+                                        self.print_slow("      Do you want to use it now?")
                             
-                                        op = input("Type 'yes' or 'no' ").lower().strip()
+                                        op = input("       Type 'yes' or 'no' ").lower().strip()
                                         while True:
                                             if op in ['yes', 'no']:
                                                 if op == 'yes':
-                                                    self.print_slow("Dang it! The phone is wrecked, Do you want to repair it?")
+                                                    print("")
+                                                    self.print_slow("      Dang it! The phone is wrecked, Do you want to repair it?")
                                                     
                                                     op = input("Type 'yes' or 'no' ").lower().strip()
                                                     while True:
                                                         if op in ['yes', 'no']:
                                                             if op == 'yes':
                                                                 if 'coins' in self.inventory:
-                                                                    self.print_slow("Coins inserted!")
-                                                                    self.print_slow("Would you like to make a call?")
+                                                                    self.print_slow("      Coins inserted!")
+                                                                    self.print_slow("      Would you like to make a call?")
+                                                                    print("")
                                                                     
-                                                                    op = input("Type 'yes' or 'no' ").lower().strip()
+                                                                    op = input("       Type 'yes' or 'no' ").lower().strip()
                                                                     while True:
                                                                         if op in ['yes', 'no']:
                                                                             if op == 'yes':
                                                                                 if 'jacket' in self.inventory:
-                                                                                    self.print_slow("Awsome! make your call")
-                                                                                    self.print_slow("A digit is missing, guess it")
+                                                                                    self.print_slow("      Awsome! make your call")
+                                                                                    self.print_slow("      A digit is missing, guess it")
+                                                                                    print("")
                                                                                     secret_number = 8
                                                                                     attempts = 0
                                                                                     max_attempts = 5
 
                                                                                     while True:
-                                                                                        user_guess = input("Enter your guess: ")
+                                                                                        user_guess = input("       Enter your guess: ")
 
                                                                                         attempts += 1
 
                                                                                         if int(user_guess) == secret_number:
-                                                                                            print(f"Congratulations! You guessed the number in {attempts} attempts.")
+                                                                                            print(f"       Congratulations! You guessed the number in {attempts} attempts.")
                                                                                             self.print_slow(       "Processing . . . ")
-                                                                                            time.sleep(3)
+                                                                                            time.sleep(4)
                                                                                             self.End_Game()
+                                                                                            self.Win()
+                                                                                            exit(0)
                                                                                             break
                                                                                         elif max_attempts > attempts:
-                                                                                            print("Incorrect. Try again.")
+                                                                                            print("    Incorrect. Try again.")
 
                                                                                         if max_attempts == attempts:
                                                                                             self.Game_Over()
                                                                                             break
 
                                                                                 else:
-                                                                                    self.print_slow("Go find a phone number")
+                                                                                    self.print_slow("      Go find a phone number")
                                                                                     break
 
                                                                             if op == 'no':
-                                                                                print("OH! Such a shame")
+                                                                                print("    OH! Such a shame")
                                                                                 break
                                                                             break
                                                                         else:
-                                                                            self.print_slow("That's not quite an option\n")
+                                                                            self.print_slow("      That's not quite an option\n")
 
                                                                 else:
-                                                                    self.print_slow("Looks like you don't have anything to pay")
+                                                                    self.print_slow("      Looks like you don't have anything to pay, go and find some money")
                                                                     break
 
                                                             if op == 'no':
-                                                                print("Ok.. bye")
+                                                                print("    Geez!... just rying to help you out")
                                                                 break
                                                             break
                                                         else:
-                                                            self.print_slow("That's not quite an option\n")
+                                                            self.print_slow("      That's not quite an option\n")
 
                                                 if op == 'no':
-                                                    print("Ok.. bye")
+                                                    print("    Ok.. bye")
                                                     break
                                                 break
                                             else:
-                                                self.print_slow("That's not quite an option\n")
+                                                self.print_slow("      That's not quite an option\n")
                                     
                                         break
                                     else:
-                                        self.print_slow("Looks like you don't have anything to repair it")
+                                        self.print_slow("      Looks like you don't have anything to repair it")
                                         break
                                 if op == 'no':
-                                    self.print_slow("Oh such a shame!")
+                                    self.print_slow("      Oh such a shame!")
                                     break
                             else:
-                                self.print_slow("That's not quite an option\n")
+                                self.print_slow("      That's not quite an option\n")
 
                     # backpack
                     if self.player_position == [0,6] and self.player_position not in self.visited:
@@ -1846,10 +1871,10 @@ class Videogame:
                         self.visited.append(self.player_position)
                         self.max_cap = 3
 
-                    print("Actual position:", self.player_position)
+                    print("    Actual position:", self.player_position)
                     print("")
                 else:
-                    print("Invalid input. Please try again.")
+                    print("    Invalid input. Please try again.")
             else:
                 self.Game_Over()
                 exit(0)

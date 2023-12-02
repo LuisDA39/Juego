@@ -6,11 +6,11 @@ import pygame
 
 class Videogame:
     def __init__(self):
-        self.health = 1 # limitar la vida, no puede llegar a mas de 100 pts
+        self.health = 2  # limitar la vida, no puede llegar a mas de 100 pts
         self.inventory = []  # crear el inventario
         self.max_cap = 1
         self.current_space = 0
-        self.player_position = [8, 5]
+        self.player_position = [1, 9]
         self.map = [
             [0, 0, 0, 0, 0, 1, 0, 0, 1, 0],
             [0, 1, 0, 0, 1, 1, 0, 1, 0, 0],
@@ -49,7 +49,7 @@ class Videogame:
 
         while True:
             option = input("Type: ")
-            op = option.lower()
+            op = option.lower().strip()
 
             if any(keyword in op for keyword in ['break', 'kick', 'spring']):
                 if op == 'break':
@@ -80,7 +80,7 @@ class Videogame:
 
         while True:
             option = input("Type: ")
-            op = option.lower()
+            op = option.lower().strip()
 
             if any(keyword in op for keyword in ['wait', 'attemp']):
                 if op == 'wait':
@@ -105,7 +105,7 @@ class Videogame:
 
         while True:
             option = input("Type: ")
-            op = option.lower()
+            op = option.lower().strip()
 
             if any(keyword in op for keyword in ['strike', 'run', 'caught']):
                 if op == 'strike':
@@ -133,7 +133,7 @@ class Videogame:
 
         while True:
             option = input("Type: ")
-            op = option.lower()
+            op = option.lower().strip()
 
             if any(keyword in op for keyword in ['strike', 'run', 'caught']):
                 if op == 'strike':
@@ -168,7 +168,7 @@ class Videogame:
 
         while True:
             option = input("Type: ")
-            op = option.lower()
+            op = option.lower().strip()
 
             if any(keyword in op for keyword in ['chair', 'wait']):
                 if op == 'chair':
@@ -192,7 +192,7 @@ class Videogame:
 
         while True:
             option = input("Type: ")
-            op = option.lower()
+            op = option.lower().strip()
 
             if any(keyword in op for keyword in ['strike', 'run', 'caught']):
                 if op == 'strike':
@@ -255,7 +255,7 @@ class Videogame:
 
         while True:
             option = input("Type: ")
-            op = option.lower()
+            op = option.lower().strip()
 
             if any(keyword in op for keyword in ['continue', 'give up']):
                 if op == 'continue':
@@ -281,7 +281,7 @@ class Videogame:
 
         while True:
             option = input("Type: ")
-            op = option.lower()
+            op = option.lower().strip()
 
             if any(keyword in op for keyword in ['sandwich', 'hash browns']):
                 if op == 'sandwich':
@@ -322,7 +322,7 @@ class Videogame:
 
         while True:
             option = input("Type: ")
-            op = option.lower()
+            op = option.lower().strip()
 
             if any(keyword in op for keyword in ['advantage', 'nothing']):
                 if op == 'advantage':
@@ -357,7 +357,7 @@ class Videogame:
 
         while True:
             option = input("Type: ")
-            op = option.lower()
+            op = option.lower().strip()
 
             if any(keyword in op for keyword in ['attention', 'find']):
                 if op == 'attention':
@@ -632,7 +632,7 @@ class Videogame:
 
         while True:
             start = input("Type Start: ")
-            st = start.lower()
+            st = start.lower().strip()
 
             if any(keyword in st for keyword in ['start']):
                 if st == 'start':
@@ -718,7 +718,7 @@ class Videogame:
 
         while True:
             option = input("Type: ")
-            op = option.lower()
+            op = option.lower().strip()
 
             if any(keyword in op for keyword in ['break', 'cut']):
                 if op == 'break':
@@ -763,7 +763,7 @@ class Videogame:
                 self.print_slow("Starting . . .")
 
             if 0 < self.health <= 100:
-                option = input("Type 'up', 'down', 'left', or 'right' to move ").lower()
+                option = input("Type 'up', 'down', 'left', or 'right' to move ").lower().strip()
 
                 if option in ['up', 'down', 'left', 'right']:
                     if option == 'up' and x > 0 and self.map[x - 1][y] != 1:
@@ -821,9 +821,9 @@ class Videogame:
 
                         while True:
                             if self.health < 100:
-                                option = input('>').lower()
-                                if option in ['yes', 'eat', 'enjoy', 'no', 'later']:
-                                    if option in ['yes', 'eat', 'enjoy']:
+                                option = input('>').lower().strip()
+                                if option in ['yes', 'eat', 'enjoy', 'no', 'later', 'now']:
+                                    if option in ['yes', 'eat', 'enjoy', 'now']:
                                         self.print_slow("Delicious! You ate an apple, and your health increased by 5 points.")
                                         self.health += 5
                                         self.visited.append(self.player_position)
@@ -881,7 +881,7 @@ class Videogame:
 
                         self.print_slow("Would you like to take the screwdriver with you?: ")
                         while True:
-                            option = input('>').lower()
+                            option = input('>').lower().strip()
 
                             if option in ['yes', 'no', 'take', 'leave']:
                                 if option in ['yes', 'take']:
@@ -904,7 +904,7 @@ class Videogame:
                                 self.print_slow("You cant do that right now.")
 
                     # first easter egg (first part)
-                    if self.player_position == [1, 8] and self.player_position not in self.visited:
+                    if self.player_position == [1, 8]:
                         print("""
                                     .%%..%%...%%%%...%%..%%...........%%%%....%%%%...%%..%%.
                                     ..%%%%...%%..%%..%%..%%..........%%..%%..%%..%%..%%%.%%.
@@ -941,9 +941,8 @@ class Videogame:
                         print("")
                         self.print_slow("Type your guess or type 'Out' to not take the quest: ")
                         while True:
-                            option = input().lower()
+                            option = input().lower().strip()
                             if option == 'space':
-                                self.visited.append(self.player_position)
                                 self.player_position = [3, 0]
                                 break
                             if option == 'out':
@@ -951,26 +950,36 @@ class Videogame:
                             else:
                                 print("Give it another thought\n")
                                 time.sleep(1)
-                                # falta: habilitar poder regresar a la casilla desde las que te telatransporto, regresar a [1,8]
 
                     # first easter egg (second part)
                     if self.player_position == [3, 0]:
-                        self.easter_egg1()
-                        self.print_slow("      Oh there's something else I've got to tell you.")
-                        self.print_slow("      Alexei Dimitrievski (The Keeper), once a brilliant scientist of the USSR, delved into mind control experiments")
-                        self.print_slow("      gone away. His ambitious pursuit led to a catastrophic mishap when a machine designed to manipulate minds backfired.")
-                        self.print_slow("      A being from a distant world seized the opportunity, intertwining its essence with The Keeper's consciousness.")
-                        print("")
-                        self.print_slow("      This entity, reliant on feeding off others' thoughts to sustain its existence, spurred The Keeper to abduct unsuspecting")
-                        self.print_slow("      individuals. The captive souls become tormented victims, subjected to nightmarish fever dreams as the creature devours ")
-                        self.print_slow("      their very thoughts.")
-                        print("")
-                        self.print_slow("      Driven by an insatiable hunger for intellect, The Keeper and the fused entity weave a dark tapestry of torment, trapping")
-                        self.print_slow("      innocent minds within a labyrinth of nightmares, perpetuating their own survival at the cost of others' mental essence.")
-                        print("")
-                        # una vez descubierto el easter egg, agregar la opcion de regresar a [1,8]
+                        if self.player_position not in self.visited:
+                            self.visited.append(self.player_position)
+                            self.easter_egg1()
+                            self.print_slow("      Oh there's something else I've got to tell you.")
+                            self.print_slow("      Alexei Dimitrievski (The Keeper), once a brilliant scientist of the USSR, delved into mind control experiments")
+                            self.print_slow("      gone away. His ambitious pursuit led to a catastrophic mishap when a machine designed to manipulate minds backfired.")
+                            self.print_slow("      A being from a distant world seized the opportunity, intertwining its essence with The Keeper's consciousness.")
+                            print("")
+                            self.print_slow("      This entity, reliant on feeding off others' thoughts to sustain its existence, spurred The Keeper to abduct unsuspecting")
+                            self.print_slow("      individuals. The captive souls become tormented victims, subjected to nightmarish fever dreams as the creature devours ")
+                            self.print_slow("      their very thoughts.")
+                            print("")
+                            self.print_slow("      Driven by an insatiable hunger for intellect, The Keeper and the fused entity weave a dark tapestry of torment, trapping")
+                            self.print_slow("      innocent minds within a labyrinth of nightmares, perpetuating their own survival at the cost of others' mental essence.")
+                            print("")
+                        else:
+                            self.print_slow("      Seems like you know a lot. Go back where you came from.")
 
-                    # second easter egg: agregar validacion de visita
+                        while True:
+                            option = input("To exit, type 'exit':")
+                            if option == 'exit':
+                                self.player_position = [1, 8]
+                                break
+                            else:
+                                self.print_slow("You cant do that right now.")
+
+                    # second easter egg
                     if self.player_position == [9, 9]:
                         print("")
                         self.print_slow("      Complete the three riddles to unlock the secret:")
@@ -982,7 +991,7 @@ class Videogame:
                         print("")
 
                         while True:
-                            option = input("Type your guess: ").lower()
+                            option = input("Type your guess: ").lower().strip()
                             if any(keyword in option for keyword in ['hawkins']):
                                 print("")
                                 self.print_slow("      Very nice! You have completed the first riddle.")
@@ -992,7 +1001,7 @@ class Videogame:
                                 self.print_slow("      Guess its name:")
                                 print("")
                                 while True:
-                                    option = input("       Type your guess: ").lower()
+                                    option = input("Type your guess: ").lower().strip()
                                     if any(keyword in option for keyword in ['vecna']):
                                         print("")
                                         self.print_slow("      Oh! You're on fire, you have completed the second riddle.")
@@ -1002,11 +1011,11 @@ class Videogame:
                                         self.print_slow("      number and fire. Type the creature's name: ")
                                         print("")
                                         while True:
-                                            option = input("       Type your guess: ").lower()
+                                            option = input("Type your guess: ").lower().strip()
                                             if any(keyword in option for keyword in ['demogorgon']):
                                                 self.print_slow("      Congratulations! You have completed all riddles.")
+                                                self.visited.append(self.player_position)
                                                 self.easter_egg2()
-                                                # cuando cambie de casilla regrese a la cancion base
                                                 break
                                             else:
                                                 print("Not the word we're looking for.\n")
@@ -1017,14 +1026,13 @@ class Videogame:
                             else:
                                 print("Not the word we're looking for.\n")
 
-                    if self.player_position == [9, 8] or self.player_position == [1, 9]:
+                    if (self.player_position == [9, 8] and [9, 9] in self.visited) or (self.player_position == [1, 9] and [3, 0] in self.visited):
                         file_path = r'everything i wanted.mp3'
                         self.play_music(file_path)
 
                     # broke down car
-                    if self.player_position == [0, 0] and self.player_position not in self.visited:
-                        if self.car_first_visit:
-                            print("""
+                    if self.player_position == [0, 0]:
+                        print("""
                                     ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
                                     ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
                                     ::::::::::::::::::::::::::::::::::::::::==+**###%%%##***++==--::::::::::::::::::::::::::.:
@@ -1049,6 +1057,8 @@ class Videogame:
                                     ::::::::::---------=-==-=============================----------:::::::---:---------:------
                                     :::::::::::::::-::-:--------------------===-====-=----------------------:-----------------                    
                         """)
+
+                        if self.car_first_visit:
                             self.print_slow("      Looks like you have found a Mercedes-Benz 190 SL from the 50s in a perfectly awful shape, it can’t even")
                             self.print_slow("      be ridden. ")
                             print("")
@@ -1085,29 +1095,30 @@ class Videogame:
                             self.car_first_visit = False
                         else:
                             self.print_slow("Ah, that car again. It seems like it's not the first time you've come across it.")
-                            self.print_slow("Oh, there are the cookies.")
                             print("")
 
-                        self.print_slow("Would you like to try a cookie?")
-                        while True:
-                            if self.health < 100:
-                                option = input('>').lower()
-                                if option in ['yes', 'eat', 'enjoy', 'no', 'later', 'cookie', 'try']:
-                                    if option in ['yes', 'eat', 'enjoy', 'cookie', 'try']:
-                                        self.print_slow("Delicious! You ate a cookie, and your health increased by 10 points.")
-                                        self.health += 10
-                                        self.visited.append(self.player_position)
-                                        if self.health > 100:
-                                            self.health = 100
-                                        break
-                                    if option in ['no', 'later']:
-                                        self.print_slow("Alright, maybe later.")
-                                        break
+                        if self.player_position not in self.visited:
+                            self.print_slow("Oh, there are the cookies.")
+                            self.print_slow("Would you like to try a cookie?")
+                            while True:
+                                if self.health < 100:
+                                    option = input('>').lower().strip()
+                                    if option in ['yes', 'eat', 'enjoy', 'no', 'later', 'cookie', 'try']:
+                                        if option in ['yes', 'eat', 'enjoy', 'cookie', 'try']:
+                                            self.print_slow("Delicious! You ate a cookie, and your health increased by 10 points.")
+                                            self.health += 10
+                                            self.visited.append(self.player_position)
+                                            if self.health > 100:
+                                                self.health = 100
+                                            break
+                                        if option in ['no', 'later']:
+                                            self.print_slow("Alright, maybe later.")
+                                            break
+                                    else:
+                                        self.print_slow("You cant do that right now.")
                                 else:
-                                    self.print_slow("You cant do that right now.")
-                            else:
-                                self.print_slow("Seems like you don't need to restore health right now. You're all good! Feel free to come back later if needed.")
-                                break
+                                    self.print_slow("Seems like you don't need to restore health right now. You're all good! Feel free to come back later if needed.")
+                                    break
 
                     # Radio
                     if self.player_position == [2, 4] and self.player_position not in self.visited:
@@ -1188,7 +1199,7 @@ class Videogame:
 
                         self.print_slow("Would you like to take the Jacket with you?: ")
                         while True:
-                            option = input('>').lower()
+                            option = input('>').lower().strip()
 
                             if option in ['yes', 'no', 'take', 'leave']:
                                 if option in ['yes', 'take']:
@@ -1212,7 +1223,7 @@ class Videogame:
                         print("")
 
                     # street signals
-                    if self.player_position == [5, 5] and self.player_position not in self.visited:
+                    if self.player_position == [5, 5]:
                         print("""
                                     =============----==========-===-------==========-----============
                                     ---=**##+======-====----=================----====-========--==---
@@ -1257,10 +1268,11 @@ class Videogame:
                                     ::-:::::::::::::::::.::::::+@@%#*+:::::::::::::::::::::::::::::::
                                     ::::.....::::::::::....::::+@@%#*+..::::::.....:::::::::.....::::
                         """)
-                        self.print_slow("      Two paths lie before you. To the left, the 'Soulless Forest' hides secrets within its eerie ")
-                        self.print_slow("      embrace. To the right, 'No Way Out' challenges your resolve. Choose your destiny wisely”")
+                        if self.player_position not in self.visited:
+                            self.print_slow("      Two paths lie before you. To the left, the 'Soulless Forest' hides secrets within its eerie ")
+                            self.print_slow("      embrace. To the right, 'No Way Out' challenges your resolve. Choose your destiny wisely”")
+                            self.visited.append(self.player_position)
                         print("")
-                        self.visited.append(self.player_position)
 
                     # Mushroom
                     if self.player_position == [7, 7] and self.player_position not in self.visited:
@@ -1304,7 +1316,7 @@ class Videogame:
 
                         self.print_slow("Would you like to try the mushroom?")
                         while True:
-                            option = input('>').lower()
+                            option = input('>').lower().strip()
                             if option in ['yes', 'eat', 'enjoy', 'no', 'later', 'mushroom', 'try']:
                                 if option in ['yes', 'eat', 'enjoy', 'mushroom', 'try']:
                                     self.print_slow("That")
@@ -1364,7 +1376,7 @@ class Videogame:
 
                         self.print_slow("Would you like to take the coins with you?: ")
                         while True:
-                            option = input('>').lower()
+                            option = input('>').lower().strip()
 
                             if option in ['yes', 'no', 'take', 'leave']:
                                 if option in ['yes', 'take']:
@@ -1473,24 +1485,30 @@ class Videogame:
                                     .--++++++++++++++++++++++++++++++++++++++++++++++++++++++=.-
                                      --:::::::::::::::::::::::::::::::::::::::::::::::::::::::- 
                         """)
-                        # implemntar la verificacion del desarmador
-                        # implemntar la verificacion de la chamarra
-                        # implemntar la verificacion del dinero
+
+                        if all(item in self.inventory for item in ['screwdriver', 'jacket', 'coins']):
+                            self.print_slow("oh me falta un numero")
+
+                            secret_number = 8
+                            attempts = 0
+
+                            while True:
+                                user_guess = input("Enter your guess: ")
+
+                                attempts += 1
+
+                                if int(user_guess) == secret_number:
+                                    print(f"Congratulations! You guessed the number in {attempts} attempts.")
+                                    break
+                                else:
+                                    print("Incorrect. Try again.")
+
+
                         # implemntar adivianr el ultimo numero (8 va a ser el numero)
                         # una vez compltadas esas acciones agregar una parte de historia en texto
                         # cuando se acabe de mostrar el texto te llevara a la batalla final en [9,4]
-                        # 
-                        self.print_slow("Type your guess or type 'Out' to not take the quest: ") # esto solo es una prueba
-                        while True:
-                            option = input().lower()
-                            if option == 'space':
-                                self.player_position = [9, 4]
-                                break
-                            if option == 'out':
-                                break
-                            else:
-                                print("Give it another thought\n")
-                                time.sleep(1)
+
+
 
                     # backpack
                     if self.player_position == [5, 9] and self.player_position not in self.visited:

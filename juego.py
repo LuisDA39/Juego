@@ -26,6 +26,7 @@ class Videogame:
         ]
         self.visited = []
         self.car_first_visit = True
+        self.reproduced = False
 
     def play_music(self, file_path):
         pygame.init()
@@ -37,7 +38,7 @@ class Videogame:
     def print_slow(self, text):
         for char in text:
             print(char, end='', flush=True)
-            time.sleep(0.05)
+            time.sleep(0.02)
         print()
 
     def path_A(self):
@@ -756,7 +757,7 @@ class Videogame:
             if boss_health < 250:
                 phase = 3
 
-    def Win():
+    def Win(self):
         print("""
 
                     ▄██   ▄    ▄██████▄  ███    █▄        ▄█     █▄   ▄█  ███▄▄▄▄     ▄█ 
@@ -877,6 +878,7 @@ class Videogame:
         self.print_slow("        LET THE ADVENTURE BEGIN! ")
 
         print("")
+        time.sleep(3)
         self.Start_game()
 
     def Start_game(self):
@@ -1612,7 +1614,6 @@ class Videogame:
                         print("")
 
                     # Minigame
-                    #si ganas, cuando acabe la plea regresar a la cancion everything i wanted
                     if self.player_position == [8, 5] and self.player_position not in self.visited:
                         file_path = r'soundfx/lobo.mp3'
                         self.play_music(file_path)
@@ -1704,6 +1705,11 @@ class Videogame:
                         else:
                             self.print_slow("      You quickly grab the weapon, fend off the wolf, and escape unscathed. Well done!")
 
+                    if self.player_position == [8, 5] and not self.reproduced:
+                        file_path = r'soundfx/everything i wanted.mp3'
+                        self.play_music(file_path)
+                        self.reproduced = True
+
                     # phone booth
                     if self.player_position == [8, 0]:
                         print("""
@@ -1789,7 +1795,7 @@ class Videogame:
                                                                                             self.End_Game()
                                                                                             self.Win()
                                                                                             exit(0)
-                                                                                            break
+
                                                                                         elif max_attempts > attempts:
                                                                                             print("    Incorrect. Try again.")
 

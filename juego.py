@@ -11,7 +11,7 @@ class Videogame:
         self.inventory = []  # crear el inventario
         self.max_cap = 1
         self.current_space = 0
-        self.player_position = [1,6]
+        self.player_position = [0,3]
         self.map = [
             [0, 0, 0, 0, 0, 1, 0, 0, 1, 0],
             [0, 1, 0, 0, 1, 1, 0, 1, 0, 0],

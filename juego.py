@@ -1783,7 +1783,7 @@ class Videogame:
                                                                                         attempts += 1
 
                                                                                         if int(user_guess) == secret_number:
-                                                                                            print(f"       Congratulations! You guessed the number in {attempts} attempts.")
+                                                                                            print(f"       Congratulations! You have guessed the number in {attempts} attempts.")
                                                                                             self.print_slow(       "Processing . . . ")
                                                                                             time.sleep(4)
                                                                                             self.End_Game()

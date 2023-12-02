@@ -567,6 +567,8 @@ class Videogame:
     # crear historia y minijuego final
 
     def Game_Over(self):
+        file_path = r'C:\Users\lloyd\Downloads\Y2meta.app - Billie Eilish - lovely (with Khalid) Audio (128 kbps).mp3'
+        self.play_music(file_path)
         print("""
 
 
@@ -592,6 +594,7 @@ class Videogame:
         
                      
         """)
+        time.sleep(27)
 
     def Title(self):
         file_path = r'everything i wanted.mp3'
@@ -1401,6 +1404,46 @@ class Videogame:
 
                     # Minigame
                     if self.player_position == [8, 5] and self.player_position not in self.visited:
+                        file_path = r'C:\Users\lloyd\Downloads\Y2meta.app - Lobo aullando-efecto de sonido (128 kbps).mp3'
+                        self.play_music(file_path)
+                        print("""                                                                    
+                                                                              ..                
+                                                                           .=#%%#=              
+                                                                        :=*#*#%%%%#.            
+                                                                    .-+#%+.    :--+=            
+                                                             .:-=*#%*--%+      .= .+            
+                                                       :=+*#*+=-=%=.   #    .=*%%::=            
+                                                    :*%#+---:-+=:.         =%%%%% +:            
+                                                  -#%=..=#*=-+=           .%%=*%*:%=            
+                                                .*%*  :=:                 -%+ :-=*%=            
+                                           .-=*#%%-                       ..      :%:           
+                                        .=#%#+: =:                             .-*#%:           
+                                    .-+#%#+: :=*:                           .+#%%%#-            
+                                   +%%#=:  :-+#-   .                      :*%%%%*:              
+                                    :+#%%%%%%%* -**:                    .*%%%%*.                
+                                       .:-%%%%#%%+                     :%%%%%=                  
+                                         -%%%%%%%.:=**-               .:*%%%+                   
+                                        -%%%%%%%%#%%#-+##=:- .         -%%%%.                   
+                                      :*%%%#=#%%%%%%%%%%#%%%*=%=.      *%%%%.                   
+                                   .-#%%*=: =%%+:%%%%%%%%%%%%%%%%+:    %%%%%=                   
+                                  :=-:.   .+#=.  -%#=#%%%#%%%%+#%%%#=: %%%%%%:                  
+                                         :=:      :#= =#%%+=+##-.-+*%%#%%%%+*%=.                
+                                                   .*-  :=#%+.:=+-. .-*%%%%%+.:=.               
+                                                     -:     ::.         -*%%%%+:                
+                                                                :.        .-*%%%#=.             
+                                                                 .=+=:.      :*%%%%+.           
+                                                                    .=**=:     :*%%%%+.         
+                                                                        -*%*=:   =%%%%%-        
+                                                                           -*%#+- =%#:=#=       
+                                                                             .=#%%*%%-  =:      
+                                                                                .+%%%=          
+                                                                                  .*%.          
+                                                                                    .           
+                                                                    
+                        """)
+                        time.sleep(5)
+                        file_path = r'C:\Users\lloyd\Downloads\Y2meta.app - Star Wars - Battle of the Heroes Suite (128 kbps).mp3'
+                        self.play_music(file_path)
                         self.visited.append(self.player_position) # Maybe aqui un ascii del lobo
                         self.print_slow("      Navigating through the forest, the tranquility shatters as a distant growl reveals a lurking wolf.")
                         self.print_slow("      Adrenaline surges, and you sprint through the trees. Amidst the chaos, you stumble upon a suitcase.")

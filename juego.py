@@ -1835,7 +1835,7 @@ class Videogame:
                                                                     break
 
                                                             if op == 'no':
-                                                                print("    Geez!... just rying to help you out")
+                                                                print("    Geez!... you're such a stingy person")
                                                                 break
                                                             break
                                                         else:
